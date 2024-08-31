@@ -13,6 +13,7 @@ public class player : MonoBehaviour
     public float radius = 0.2f;
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform groundCheck2;
 
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -26,10 +27,13 @@ public class player : MonoBehaviour
 
     public static bool staticGunFliped;
     public static int timer1 = 0;
+    public static int timer2 = 0;
+    public static GameObject pl;
 
     // Start is called before the first frame update
     void Start()
     {
+        pl = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
        spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -48,6 +52,10 @@ public class player : MonoBehaviour
         if (timer1 != 0)
         {
             timer1--;
+        }
+        if (timer2 != 0)
+        {
+            timer2--;
         }
         horizontal = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -126,6 +134,14 @@ public class player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, radius, groundlayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundlayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);
+        UnityEngine.Debug.DrawRay(groundCheck.position, Vector2.down * hit.distance, Color.red);
+
+        if (hit.collider != null || hit2.collider != null)
+        {
+            return true;
+        }
+        return false;
     }
 }

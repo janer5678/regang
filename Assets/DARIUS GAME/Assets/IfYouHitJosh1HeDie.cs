@@ -8,6 +8,7 @@ public class IfYouHitJosh1HeDie : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.tag == "Josh1")
         {
             JoshCharacter = GameObject.FindWithTag("Josh1");

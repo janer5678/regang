@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class player2 : MonoBehaviour
@@ -47,15 +48,17 @@ public class player2 : MonoBehaviour
     public static bool blocking2 = false;
     public GameObject object1;
     private float speed2 = 3f;
+    public static GameObject pl2;
 
     // Start is called before the first frame update
     void Start()
     {
+        pl2 = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         ability = ability + UnityEngine.Random.Range(1, 4) - 1;
         originalColor = spriteRenderer.color;
-        ability = 6;
+        ability = 2;
 
     }
     void FlipSprite()

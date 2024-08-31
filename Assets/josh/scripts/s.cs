@@ -45,7 +45,7 @@ public class s : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (i ==0 && gameObject.CompareTag("ground"))
+        if (i == 0 && gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);
         }
@@ -55,7 +55,7 @@ public class s : MonoBehaviour
             i = 0;
             k = 0;
         }
-        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("player1") && !collision.gameObject.CompareTag("boomerang"))
+        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player.pl && !collision.gameObject.CompareTag("boomerang"))
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
