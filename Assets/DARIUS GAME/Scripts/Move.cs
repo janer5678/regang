@@ -27,6 +27,7 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
 
     private SpriteRenderer SpriteRenderer;
+
     void Start()
     {
         anime = body.GetComponent<Animator>();
@@ -45,18 +46,37 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, groundLayer);
+
+
+
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.1f, transform.position.y), Vector2.down, 0.4f, groundLayer);
+
+
+
+        RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 0.1f, transform.position.y), Vector2.down, 0.4f, groundLayer);
+
+        if (hit.collider != null)
+        {
+            onTheGround = true;
+        }
+        else if (hit2.collider != null)
+        {
+            onTheGround = true;
+        }
+        else if (hit3.collider != null)
+        {
+            onTheGround = true;
+        }
+        else
+        {
+            onTheGround = false;
+        }
+
         if (!dead)
         {
             GroundCheck();
-            if (transform.position.x < -9f)
-            {
-                transform.position = new Vector2(-9f, transform.position.y);
-            }
 
-            if (transform.position.x > 9f)
-            {
-                transform.position = new Vector2(9f, transform.position.y);
-            }
 
             if (Input.GetKey(KeyCode.D))
             {
@@ -114,11 +134,11 @@ public class Move : MonoBehaviour
                     playerBody.velocity = Vector3.zero;
                     if (toRight == true)
                     {
-                        playerBody.AddForce(transform.right * 10f, ForceMode2D.Impulse);
+                        playerBody.velocity = new Vector2(playerBody.velocity.x + 6, playerBody.velocity.y);
                     }
                     else if (toLeft == true)
                     {
-                        playerBody.AddForce(transform.right * (-10f), ForceMode2D.Impulse);
+                        playerBody.velocity = new Vector2(playerBody.velocity.x - 6, playerBody.velocity.y);
 
                     }
                 }
@@ -140,42 +160,21 @@ public class Move : MonoBehaviour
         playerBody.gravityScale = 5f;
         canJump = true;
         player.enabled = true;
+
+        playerBody.velocity = new Vector2(0f, 0f);
+        print("hello");
     }
 
     void DodgeCooldown1()
     {
         canDodge = true;
+
+
     }
 
 
     void GroundCheck()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundDistance, groundLayer);
-
-
-
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y), Vector2.down, groundDistance, groundLayer);
-
-
-
-        RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y), Vector2.down, groundDistance, groundLayer);
-
-        if (hit.collider != null)
-        {
-            onTheGround = true;
-        }
-        else if (hit2.collider != null)
-        {
-            onTheGround = true;
-        }
-        else if (hit3.collider != null)
-        {
-            onTheGround = true;
-        }
-        else
-        {
-            onTheGround = false;
-        }
 
 
 
