@@ -1,9 +1,9 @@
-﻿using Assets.GH.GameObjects.Contracts;
-using System;
+﻿using System;
+using GH.Scripts.Enums;
+using GH.Scripts.GameObjects.Contracts;
 using UnityEngine;
-using Assets.GH.Enums;
 
-namespace Assets.GH.GameObjects
+namespace GH.Scripts.GameObjects
 {
     abstract class Character : MonoBehaviour, IMoveable
     {

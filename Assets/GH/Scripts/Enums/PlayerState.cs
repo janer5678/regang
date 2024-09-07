@@ -1,4 +1,4 @@
-namespace Assets.GH.Enums
+namespace GH.Scripts.Enums
 {
     enum PlayerState
     {

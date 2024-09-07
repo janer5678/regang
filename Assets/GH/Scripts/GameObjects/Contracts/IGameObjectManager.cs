@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using Assets.GH.Enums;
+﻿using GH.Scripts.Enums;
+using UnityEngine;
 
-namespace Assets.GH.GameObjects.Contracts
+namespace GH.Scripts.GameObjects.Contracts
 {
     interface IGameObjectManager
     {

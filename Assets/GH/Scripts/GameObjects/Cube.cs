@@ -1,8 +1,8 @@
 ﻿using System;
+using GH.Scripts.Enums;
 using UnityEngine;
-using Assets.GH.Enums;
 
-namespace Assets.GH.GameObjects
+namespace GH.Scripts.GameObjects
 {
     class Cube : Character
     {

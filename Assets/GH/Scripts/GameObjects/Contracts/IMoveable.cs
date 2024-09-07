@@ -1,4 +1,4 @@
-namespace Assets.GH.GameObjects.Contracts
+namespace GH.Scripts.GameObjects.Contracts
 {
     interface IMoveable
     {

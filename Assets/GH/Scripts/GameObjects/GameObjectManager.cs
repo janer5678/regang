@@ -1,9 +1,9 @@
-﻿using Assets.GH.GameObjects.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GH.Scripts.Enums;
+using GH.Scripts.GameObjects.Contracts;
 using UnityEngine;
-using Assets.GH.Enums;
 
-namespace Assets.GH.GameObjects
+namespace GH.Scripts.GameObjects
 {
     class GameObjectManager : IGameObjectManager
     {

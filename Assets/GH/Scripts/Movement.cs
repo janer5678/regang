@@ -1,13 +1,13 @@
 // Unity version: 2022.3.24f1
 
-using Assets.GH.Enums;
-using Assets.GH.GameObjects;
-using Assets.GH.GameObjects.Contracts;
+using GH.Scripts.Enums;
+using GH.Scripts.GameObjects;
+using GH.Scripts.GameObjects.Contracts;
 using UnityEngine;
 
-namespace Assets.GH
+namespace GH.Scripts
 {    
-    public class GDMovement : MonoBehaviour
+    public class Movement : MonoBehaviour
     {
         public GameObject[] raycasts;
         public Sprite cubeSprite;
