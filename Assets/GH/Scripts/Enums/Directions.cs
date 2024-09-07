@@ -1,5 +1,8 @@
-﻿namespace GH.Scripts.Enums
+﻿using System;
+
+namespace GH.Scripts.Enums
 {
+    [Flags]
     enum Directions
     {
         None = 0,
