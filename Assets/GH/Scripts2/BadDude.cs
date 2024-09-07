@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GH.Scripts2
 {
@@ -11,15 +10,15 @@ namespace GH.Scripts2
             {
                 transform.position = new Vector2(RigidBody.position.x - xSpeed * Time.deltaTime, RigidBody.position.y);
             }
-            else if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
                 transform.position = new Vector2(RigidBody.position.x + xSpeed * Time.deltaTime, RigidBody.position.y);
             }
-            else if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
             {
                 transform.position = new Vector2(RigidBody.position.x, RigidBody.position.y - ySpeed * Time.deltaTime);
             }
-            else if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 transform.position = new Vector2(RigidBody.position.x, RigidBody.position.y + ySpeed * Time.deltaTime);
             }

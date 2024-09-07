@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace GH.Scripts2.Cube
@@ -49,3 +48,6 @@ namespace GH.Scripts2.Cube
         }
     }
 }
+
+// dash (touch somebody kills them)
+// use ability turn into ship

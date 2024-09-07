@@ -7,6 +7,8 @@ namespace GH.Scripts2
         [SerializeField] private GameObject[] playerStates;
         private int _currentStateIndex;
 
+        public Vector2 position;
+
         private void Start()
         {
             // The first in the list will always be the initially active player.

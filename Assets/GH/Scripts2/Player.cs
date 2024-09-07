@@ -8,11 +8,13 @@ namespace GH.Scripts2
         [SerializeField] protected float ySpeed;
         protected Rigidbody2D RigidBody;
         protected SpriteRenderer SpriteRenderer;
+        protected BehaviourManager BehaviourManager;
 
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody2D>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
+            BehaviourManager = GetComponentInParent<BehaviourManager>();
         }
 
         protected void MoveHorizontally(float speed)
@@ -25,6 +27,22 @@ namespace GH.Scripts2
                 < 0 => true,
                 _ => SpriteRenderer.flipX
             };
+        }
+
+        private void OnEnable()
+        {
+            if (BehaviourManager is not null)
+            {
+                transform.position = BehaviourManager.position;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (BehaviourManager is not null)
+            {
+                BehaviourManager.position = new Vector2(transform.position.x, transform.position.y);
+            }
         }
     }
 }

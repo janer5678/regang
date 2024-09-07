@@ -16,7 +16,6 @@ namespace GH.Scripts2.Ship
             if (Input.GetKey(KeyCode.RightArrow))
                 MoveHorizontally(xSpeed);
 
-
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 var nextVelocityY = RigidBody.velocity.y + ySpeed;
@@ -37,3 +36,8 @@ namespace GH.Scripts2.Ship
         }
     }
 }
+
+// auto fire missiles
+
+// shrink hitbox but missiles size remains same
+// drop bomb
