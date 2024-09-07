@@ -10,15 +10,15 @@ namespace Assets.GH.GameObjects
         private bool canJump = false;
         private bool canDrop = false;
 
-        public Cube(
-            Rigidbody2D rb, 
-            float xSpeed, 
-            float ySpeed, 
-            float gravityScale, 
-            GameObject[] raycasts, 
-            Action<Directions> flipSprite) 
-            : base(rb, xSpeed, ySpeed, gravityScale, flipSprite)
+        public void Init(
+            Rigidbody2D rb,
+            float xSpeed,
+            float ySpeed,
+            float gravityScale,
+            GameObject[] raycasts,
+            Action<Directions> flipSprite)
         {
+            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite);
             _raycasts = raycasts;
         }
 

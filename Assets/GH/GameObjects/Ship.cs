@@ -5,19 +5,19 @@ namespace Assets.GH.GameObjects
 {
     class Ship : Moveable
     {
-        private readonly float _maxVelocityY;
-        private readonly float _xDeceleration;
+        private float _maxVelocityY;
+        private float _xDeceleration;
 
-        public Ship(
-            Rigidbody2D rb, 
-            float xSpeed, 
-            float ySpeed, 
-            float gravityScale, 
-            float maxVelocityY, 
+        public void Init(
+            Rigidbody2D rb,
+            float xSpeed,
+            float ySpeed,
+            float gravityScale,
+            float maxVelocityY,
             float xDeceleration,
             Action<Directions> flipSprite)
-            : base(rb, xSpeed, ySpeed, gravityScale, flipSprite)
         {
+            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite);
             _maxVelocityY = maxVelocityY;
             _xDeceleration = xDeceleration;
         }
@@ -36,12 +36,22 @@ namespace Assets.GH.GameObjects
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
+                // Math.Max and Mathf.Max doesn't like me
+                
                 var nextVelocityY = _rb.velocity.y + _speedY;
 
-                if (nextVelocityY > _maxVelocityY) 
+                if (nextVelocityY > _maxVelocityY)
                     nextVelocityY = _maxVelocityY;
-                
+
                 _rb.velocity = new Vector2(_rb.velocity.x, nextVelocityY);
+            }
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("player"))
+            {
+                Destroy(collision.gameObject);
             }
         }
     }

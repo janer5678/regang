@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace Assets.GH.GameObjects
 {
-    abstract class Moveable : IMoveable
+    abstract class Moveable : MonoBehaviour, IMoveable
     {
-        protected readonly Rigidbody2D _rb;
-        protected readonly float _speedX;
-        protected readonly float _speedY;
-        protected readonly float _gravityScale;
-        private readonly Action<Directions> _flipSprite;
+        protected Rigidbody2D _rb;
+        protected float _speedX;
+        protected float _speedY;
+        protected float _gravityScale;
+        protected Action<Directions> _flipSprite;
 
-        public Moveable(
-            Rigidbody2D rb, 
-            float xSpeed, 
-            float ySpeed, 
+        public void Init(
+            Rigidbody2D rb,
+            float xSpeed,
+            float ySpeed,
             float gravityScale,
             Action<Directions> flipSprite)
         {
@@ -34,14 +34,12 @@ namespace Assets.GH.GameObjects
 
             if (_flipSprite is not null)
             {
-                Directions direction;
+                var direction = Directions.None;
 
                 if (speed > 0)
-                    direction = Directions.Right;
+                    direction |= Directions.Right;
                 else if (speed < 0)
-                    direction = Directions.Left;
-                else
-                    direction = Directions.None;
+                    direction |= Directions.Left;
 
                 _flipSprite(direction);
             }

@@ -19,6 +19,7 @@ namespace Assets.GH
             var spriteRenderer = GetComponent<SpriteRenderer>();
 
             _gameObjectManager = new GameObjectManager(
+                gameObject,
                 rb, 
                 spriteRenderer, 
                 new() 

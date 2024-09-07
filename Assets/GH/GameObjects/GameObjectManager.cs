@@ -10,11 +10,13 @@ namespace Assets.GH.GameObjects
         private readonly Rigidbody2D _rb;
         private readonly SpriteRenderer _spriteRenderer;
         private readonly Dictionary<PlayerState, Sprite> _sprites;
+        private readonly GameObject _gameObject;
 
         private PlayerState _playerState;
 
-        public GameObjectManager(Rigidbody2D rb, SpriteRenderer spriteRenderer, Dictionary<PlayerState, Sprite> sprites)
+        public GameObjectManager(GameObject gameObject, Rigidbody2D rb, SpriteRenderer spriteRenderer, Dictionary<PlayerState, Sprite> sprites)
         {
+            _gameObject = gameObject;
             _playerState = PlayerState.Cube;
             _rb = rb;
             _spriteRenderer = spriteRenderer;
@@ -30,12 +32,16 @@ namespace Assets.GH.GameObjects
             {
                 case PlayerState.Cube:
                 {
-                    _moveableMap.Add(state, new Cube(_rb, 6f, 6f, 1f, raycasts, FlipSprite));
+                    var cube = _gameObject.AddComponent<Cube>();
+                    cube.Init(_rb, 6f, 6f, 1f, raycasts, FlipSprite);
+                    _moveableMap.Add(state, cube);
                 } break;
 
                 case PlayerState.Ship:
                 {
-                    _moveableMap.Add(state, new Ship(_rb, 6f, 0.08f, 2f, 8f, 0.6f, FlipSprite));
+                    var ship = _gameObject.AddComponent<Ship>();
+                    ship.Init(_rb, 6f, 0.08f, 2f, 8f, 0.6f, FlipSprite);
+                    _moveableMap.Add(state, ship);
                 } break;
             }
         }
