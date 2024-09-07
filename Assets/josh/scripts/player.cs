@@ -160,7 +160,7 @@ public class player : MonoBehaviour
             jumpingPower = jumpingPower * 1.75f;
             StartCoroutine(jumpReset());
         }
-        if (collision.gameObject.CompareTag("freemoveorb"))
+        if (collision.gameObject.CompareTag("orb2"))
         {
             Destroy(collision.gameObject);
             orbspawner.a = true;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class bombs : MonoBehaviour
 {
 
-    
+    private int hi = 0;
     private Rigidbody2D rb;
     private bool bulletFacing = false;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -32,7 +32,6 @@ public class bombs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
 
     }
@@ -55,11 +54,15 @@ public class bombs : MonoBehaviour
 
             yield return new WaitForSeconds(0.015f);  
         }
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(explode());  
+        if (hi == 0)
+        {
+            StartCoroutine(explode());
+            hi = 1;
+        }
         if (!collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("wall"))
         {
             Destroy(collision.gameObject);
