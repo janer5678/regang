@@ -1,5 +1,3 @@
-// Unity version: 2022.3.24f1
-
 using GH.Scripts.Enums;
 using GH.Scripts.GameObjects;
 using GH.Scripts.GameObjects.Contracts;
@@ -9,11 +7,16 @@ namespace GH.Scripts
 {    
     public class Movement : MonoBehaviour
     {
-        public GameObject[] raycasts;
-        public Sprite cubeSprite;
-        public Sprite shipSprite;
-        public KeyCode abilityKey1;
-        public KeyCode abilityKey2;
+        [SerializeField]
+        private GameObject[] raycasts;
+        [SerializeField]
+        private Sprite cubeSprite;
+        [SerializeField]
+        private Sprite shipSprite;
+        [SerializeField]
+        private KeyCode abilityKey1;
+        [SerializeField]
+        private KeyCode abilityKey2;
 
         private IGameObjectManager _gameObjectManager;
 
