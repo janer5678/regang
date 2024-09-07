@@ -11,6 +11,11 @@ namespace GH.Scripts.Cube
 
         private void Update()
         {
+            Move();
+        }
+
+        protected override void Move()
+        {
             RigidBody.velocity = new Vector2(0, RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))

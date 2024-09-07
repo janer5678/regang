@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 
 namespace GH.Scripts.Ship
 {
@@ -9,6 +12,16 @@ namespace GH.Scripts.Ship
 
         private void Update()
         {
+            Move();
+        }
+
+        private void FixedUpdate()
+        {
+            RigidBody.MoveRotation(Quaternion.LookRotation(RigidBody.velocity));
+        }
+
+        protected override void Move()
+        {
             RigidBody.velocity = new Vector2(RigidBody.velocity.x * xDeceleration, RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -18,12 +31,7 @@ namespace GH.Scripts.Ship
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                var nextVelocityY = RigidBody.velocity.y + ySpeed;
-
-                if (nextVelocityY > yMaxVelocity)
-                    nextVelocityY = yMaxVelocity;
-
-                RigidBody.velocity = new Vector2(RigidBody.velocity.x, nextVelocityY);
+                RigidBody.velocity = new Vector2(RigidBody.velocity.x, Math.Min(RigidBody.velocity.y + ySpeed, yMaxVelocity));
             }
         }
 

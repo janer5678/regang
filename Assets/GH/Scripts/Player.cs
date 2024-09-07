@@ -2,7 +2,7 @@
 
 namespace GH.Scripts
 {
-    public class Player : MonoBehaviour
+    public abstract class Player : MonoBehaviour
     {
         [SerializeField] protected float xSpeed;
         [SerializeField] protected float ySpeed;
@@ -28,6 +28,8 @@ namespace GH.Scripts
                 _ => SpriteRenderer.flipX
             };
         }
+
+        protected abstract void Move();
 
         private void OnEnable()
         {
