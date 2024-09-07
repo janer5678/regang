@@ -13,6 +13,7 @@ public class player3 : MonoBehaviour
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform groundCheck2;
+    [SerializeField] private Transform groundCheck3;
 
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -29,10 +30,12 @@ public class player3 : MonoBehaviour
     public static int shieldmax = 1;
     public static bool invincible = false;
     public GameObject object1;
+    public static GameObject pl3;
 
     // Start is called before the first frame update
     void Start()
     {
+        pl3 = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
        spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2.enabled = false;
@@ -49,9 +52,9 @@ public class player3 : MonoBehaviour
     {
         animator.SetBool("side", true);
         Vector3 originalPosition = groundCheck.position;
-        groundCheck.position = new Vector3(originalPosition.x, originalPosition.y + 0.2f, originalPosition.z);
+        groundCheck.position = new Vector3(originalPosition.x - 0.2f, originalPosition.y + 0.2f, originalPosition.z);
         Vector3 originalPosition2 = groundCheck2.position;
-        groundCheck2.position = new Vector3(originalPosition2.x, originalPosition2.y + 0.2f, originalPosition2.z);
+        groundCheck2.position = new Vector3(originalPosition2.x + 0.2f, originalPosition2.y + 0.2f, originalPosition2.z);
         speed = speed * 3.5f;
         boxCollider2.enabled = true;
         boxCollider.enabled = false;
@@ -62,8 +65,8 @@ public class player3 : MonoBehaviour
         boxCollider.enabled = true;
         originalPosition = groundCheck.position;
         originalPosition2 = groundCheck2.position;
-        groundCheck.position = new Vector3(originalPosition.x, originalPosition.y - 0.2f, originalPosition.z);
-        groundCheck2.position = new Vector3(originalPosition2.x, originalPosition2.y - 0.2f, originalPosition2.z);
+        groundCheck.position = new Vector3(originalPosition.x + 0.2f, originalPosition.y - 0.2f, originalPosition.z);
+        groundCheck2.position = new Vector3(originalPosition2.x - 0.2f, originalPosition2.y - 0.2f, originalPosition2.z);
     }
     private IEnumerator ability2()
     {
@@ -98,6 +101,8 @@ public class player3 : MonoBehaviour
             StartCoroutine(ability2());
 
         }
+
+
         horizontal = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -146,12 +151,41 @@ public class player3 : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundlayer);
         RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);
+        RaycastHit2D hit3 = Physics2D.Raycast(groundCheck3.position, Vector2.down, 0.1f, groundlayer);
         UnityEngine.Debug.DrawRay(groundCheck.position, Vector2.down * hit.distance, Color.red);
-
+        if (hit3.collider!=null)
+        {
+            return true;
+        }
         if (hit.collider != null || hit2.collider != null)
         {
             return true;
         }
         return false;
+
+    }
+    private IEnumerator jumpReset()
+    {
+        yield return new WaitForSeconds(3);
+        jumpingPower = jumpingPower / 1.75f;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("jumpboostorb"))
+        {
+            Destroy(collision.gameObject);
+            powerupjump.a = true;
+            jumpingPower = jumpingPower * 1.75f;
+            StartCoroutine(jumpReset());
+        }
+        if (collision.gameObject.CompareTag("freemoveorb"))
+        {
+            Destroy(collision.gameObject);
+            orbspawner.a = true;
+            timer2 = 0;
+            timer1 = 0;
+        }
     }
 }

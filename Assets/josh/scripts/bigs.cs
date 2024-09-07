@@ -7,6 +7,7 @@ public class bigs : MonoBehaviour
     private Rigidbody2D rb;
     private int j = 45;
     private bool bulletFacing = false;
+    public GameObject p; 
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +50,7 @@ public class bigs : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("player2") && !collision.gameObject.CompareTag("bigboomerang"))
+        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player2.pl2 && !collision.gameObject.CompareTag("bigboomerang"))
         {
             Destroy(collision.gameObject);
             player2.kill = true;

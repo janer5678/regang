@@ -46,7 +46,7 @@ public class player3shield : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
+        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player3.pl3)
         {
             Destroy(collision.gameObject);
             player3.shieldmax++;
