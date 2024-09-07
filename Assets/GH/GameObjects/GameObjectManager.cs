@@ -43,8 +43,6 @@ namespace Assets.GH.GameObjects
         }
 
         public void TogglePlayerState()
-        {
-            _playerState = _playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
-        }
+            => _playerState = _playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
     }
 }
