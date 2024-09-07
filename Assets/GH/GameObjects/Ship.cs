@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.GH.GameObjects
 {
@@ -7,8 +8,15 @@ namespace Assets.GH.GameObjects
         private readonly float _maxVelocityY;
         private readonly float _xDeceleration;
 
-        public Ship(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale, float maxVelocityY, float xDeceleration)
-            : base(rb, xSpeed, ySpeed, gravityScale)
+        public Ship(
+            Rigidbody2D rb, 
+            float xSpeed, 
+            float ySpeed, 
+            float gravityScale, 
+            float maxVelocityY, 
+            float xDeceleration,
+            Action<Directions> flipSprite)
+            : base(rb, xSpeed, ySpeed, gravityScale, flipSprite)
         {
             _maxVelocityY = maxVelocityY;
             _xDeceleration = xDeceleration;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.GH.GameObjects
 {
@@ -9,8 +10,14 @@ namespace Assets.GH.GameObjects
         private bool canJump = false;
         private bool canDrop = false;
 
-        public Cube(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale, GameObject[] raycasts) 
-            : base(rb, xSpeed, ySpeed, gravityScale)
+        public Cube(
+            Rigidbody2D rb, 
+            float xSpeed, 
+            float ySpeed, 
+            float gravityScale, 
+            GameObject[] raycasts, 
+            Action<Directions> flipSprite) 
+            : base(rb, xSpeed, ySpeed, gravityScale, flipSprite)
         {
             _raycasts = raycasts;
         }

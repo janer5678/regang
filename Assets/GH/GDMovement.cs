@@ -7,6 +7,8 @@ namespace Assets.GH
     public class GDMovement : MonoBehaviour
     {
         public GameObject[] raycasts;
+        public Sprite cubeSprite;
+        public Sprite shipSprite;
 
         private IGameObjectManager _gameObjectManager;
 
@@ -16,7 +18,15 @@ namespace Assets.GH
             var rb = GetComponent<Rigidbody2D>();
             var spriteRenderer = GetComponent<SpriteRenderer>();
 
-            _gameObjectManager = new GameObjectManager(rb);
+            _gameObjectManager = new GameObjectManager(
+                rb, 
+                spriteRenderer, 
+                new() 
+                {
+                    { PlayerState.Cube, cubeSprite },
+                    { PlayerState.Ship, shipSprite }
+                });
+            
             _gameObjectManager.AddMoveable(PlayerState.Cube, raycasts);
             _gameObjectManager.AddMoveable(PlayerState.Ship); 
         }
