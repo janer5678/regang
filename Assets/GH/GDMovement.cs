@@ -41,6 +41,7 @@ namespace Assets.GH
 
         void Update()
         {
+            // TODO: remove this, move to Cube and Ship to handle
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _gameObjectManager.SwitchPlayerState();
