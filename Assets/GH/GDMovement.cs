@@ -8,7 +8,7 @@ public class GDMovement : MonoBehaviour
     private bool canJump = false;
     private bool canDrop = false;
 
-    public GameObject raycast;
+    public GameObject[] raycasts;
     public float SPEED_X = 5.0f;
     public float SPEED_Y = 10.0f;
 
@@ -40,14 +40,17 @@ public class GDMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow) && canDrop)
         {
             canDrop = false;
-            rb.velocity = new Vector2(rb.velocity.x, -SPEED_Y);
+            rb.velocity = new Vector2(rb.velocity.x, -SPEED_Y * 1.1f);
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(raycast.transform.position, -Vector2.up, 0.1f);
+        foreach (var raycast in raycasts)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(raycast.transform.position, -Vector2.up, 0.1f);
 
-        if (hit)
-            canJump = true;
+            if (hit)
+                canJump = true;
 
-        Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
+            Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
+        }
     }
 }
