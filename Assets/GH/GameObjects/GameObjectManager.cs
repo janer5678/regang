@@ -36,7 +36,7 @@ namespace Assets.GH.GameObjects
             }
         }
 
-        public void Move()
+        public void Update()
         {
             if (_moveableMap.ContainsKey(_playerState))
                 _moveableMap[_playerState].Move();

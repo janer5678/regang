@@ -28,7 +28,7 @@ namespace Assets.GH
                 _gameObjectManager.TogglePlayerState();
             }
 
-            _gameObjectManager.Move();
+            _gameObjectManager.Update();
         }
     }
 }
