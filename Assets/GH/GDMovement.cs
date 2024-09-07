@@ -27,37 +27,11 @@ namespace Assets.GH
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                TogglePlayerState();
+                playerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
             }
 
             _gameObjectManager.AddMoveable(playerState, SPEED_X, SPEED_Y, raycasts);
             _gameObjectManager.Move(playerState);
-        }
-
-        void TogglePlayerState()
-        {
-            var nextPlayerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
-
-            if (nextPlayerState == PlayerState.Cube)
-            {
-                SwitchToCube();
-            }
-            else
-            {
-                SwitchToShip();
-            }
-        }
-
-        void SwitchToCube()
-        {
-            playerState = PlayerState.Cube;
-            Debug.Log("Switched to cube");
-        }
-
-        void SwitchToShip()
-        {
-            playerState = PlayerState.Ship;
-            Debug.Log("Switched to ship");
         }
     }
 }
