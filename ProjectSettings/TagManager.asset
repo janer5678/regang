@@ -15,6 +15,13 @@ TagManager:
   - BossBody
   - BossSmallLeg
   - Josh1
+  - jumpboostorb
+  - boomerang
+  - blue
+  - orb2
+  - bigboomerang
+  - player
+  - shield
   layers:
   - Default
   - TransparentFX
