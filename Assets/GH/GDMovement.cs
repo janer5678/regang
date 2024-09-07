@@ -1,114 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.GH.GameObjects;
+using Assets.GH.GameObjects.Contracts;
 using UnityEngine;
 
-public class GDMovement : MonoBehaviour
-{
-    private enum PlayerState
+namespace Assets.GH
+{    
+    public class GDMovement : MonoBehaviour
     {
-        Cube,
-        Ship
-    }
+        private PlayerState playerState;
 
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+        public GameObject[] raycasts;
+        public float SPEED_X = 5.0f;
+        public float SPEED_Y = 10.0f;
 
-    private bool canJump = false;
-    private bool canDrop = false;
-    private PlayerState playerState;
+        private IGameObjectManager _gameObjectManager;
 
-    public GameObject[] raycasts;
-    public float SPEED_X = 5.0f;
-    public float SPEED_Y = 10.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Start is called before the first frame update
+        void Start()
         {
-            TogglePlayerState();
+            var rb = GetComponent<Rigidbody2D>();
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+
+            _gameObjectManager = new GameObjectManager(rb);
         }
 
-        if (playerState == PlayerState.Cube)
+        void Update()
         {
-            CubeMovement();
-        }
-        else
-        {
-            ShipMovement();
-        }
-    }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TogglePlayerState();
+            }
 
-    void CubeMovement()
-    {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-            MoveHorizontally(-SPEED_X);
-        if (Input.GetKey(KeyCode.RightArrow))
-            MoveHorizontally(SPEED_X);
-
-        if (Input.GetKey(KeyCode.UpArrow) && canJump)
-        {
-            canJump = false;
-            canDrop = true;
-            rb.velocity = new Vector2(rb.velocity.x, SPEED_Y);
+            _gameObjectManager.AddMoveable(playerState, SPEED_X, SPEED_Y, raycasts);
+            _gameObjectManager.Move(playerState);
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) && canDrop)
+        void TogglePlayerState()
         {
-            canDrop = false;
-            rb.velocity = new Vector2(rb.velocity.x, -SPEED_Y * 1.1f);
+            var nextPlayerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
+
+            if (nextPlayerState == PlayerState.Cube)
+            {
+                SwitchToCube();
+            }
+            else
+            {
+                SwitchToShip();
+            }
         }
 
-        foreach (var raycast in raycasts)
+        void SwitchToCube()
         {
-            RaycastHit2D hit = Physics2D.Raycast(raycast.transform.position, -Vector2.up, 0.1f);
-
-            if (hit)
-                canJump = true;
-
-            Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
+            playerState = PlayerState.Cube;
+            Debug.Log("Switched to cube");
         }
-    }
 
-    void ShipMovement()
-    {
-        
-    }
-
-    void MoveHorizontally(float speed)
-        => rb.velocity = new Vector2(speed, rb.velocity.y);
-
-    void TogglePlayerState()
-    {
-        var nextPlayerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
-        
-        if (nextPlayerState == PlayerState.Cube)
+        void SwitchToShip()
         {
-            SwitchToCube();
+            playerState = PlayerState.Ship;
+            Debug.Log("Switched to ship");
         }
-        else
-        {
-            SwitchToShip();
-        }
-    }
-
-    void SwitchToCube()
-    {
-        playerState = PlayerState.Cube;
-        Debug.Log("Switched to cube");
-    }
-
-    void SwitchToShip()
-    {
-        playerState = PlayerState.Ship;
-        Debug.Log("Switched to ship");
     }
 }
