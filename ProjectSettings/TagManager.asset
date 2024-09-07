@@ -15,6 +15,7 @@ TagManager:
   - BossBody
   - BossSmallLeg
   - Josh1
+  - player
   layers:
   - Default
   - TransparentFX
