@@ -1,15 +1,18 @@
 ﻿using System;
 using GH.Scripts.Enums;
+using GH.Scripts.GameObjects.Contracts;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace GH.Scripts.GameObjects
 {
-    class Cube : Character
+    class Cube : MonoBehaviour, IMoveable
     {
         private GameObject[] _raycasts;
+        private Character _character;
 
-        private bool _canJump = false;
-        private bool _canDrop = false;
+        private bool _canJump;
+        private bool _canDrop;
 
         public void Init(
             Rigidbody2D rb,
@@ -19,34 +22,37 @@ namespace GH.Scripts.GameObjects
             GameObject[] raycasts,
             Action<Directions> flipSprite,
             KeyCode ability1,
-            KeyCode ability2)
+            KeyCode ability2,
+            Character character)
         {
-            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
+            _character = character;
             _raycasts = raycasts;
+
+            _character.Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
         }
 
-        public override void Move()
+        public void Move()
         {
-            UpdateGravity();
+            _character.UpdateGravity();
 
-            RigidBody.velocity = new Vector2(0, RigidBody.velocity.y);
+            _character.RigidBody.velocity = new Vector2(0, _character.RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-SpeedX);
+                _character.MoveHorizontally(-_character.SpeedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(SpeedX);
+                _character.MoveHorizontally(_character.SpeedX);
 
             if (Input.GetKey(KeyCode.UpArrow) && _canJump)
             {
                 _canJump = false;
                 _canDrop = true;
-                RigidBody.velocity = new Vector2(RigidBody.velocity.x, SpeedY);
+                _character.RigidBody.velocity = new Vector2(_character.RigidBody.velocity.x, _character.SpeedY);
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && _canDrop)
             {
                 _canDrop = false;
-                RigidBody.velocity = new Vector2(RigidBody.velocity.x, -SpeedY * 1.1f);
+                _character.RigidBody.velocity = new Vector2(_character.RigidBody.velocity.x, -_character.SpeedY * 1.1f);
             }
 
             foreach (var raycast in _raycasts)
@@ -60,7 +66,17 @@ namespace GH.Scripts.GameObjects
             }
         }
 
+        public void Destroy()
+        {
+            Destroy(this);
+        }
+
         private void Dash()
+        {
+
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
 
         }

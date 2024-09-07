@@ -3,7 +3,7 @@
 namespace GH.Scripts.Enums
 {
     [Flags]
-    enum Directions
+    public enum Directions
     {
         None = 0,
         Left = 1,

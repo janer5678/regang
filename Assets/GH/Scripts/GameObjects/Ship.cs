@@ -1,13 +1,15 @@
 ﻿using System;
 using GH.Scripts.Enums;
+using GH.Scripts.GameObjects.Contracts;
 using UnityEngine;
 
 namespace GH.Scripts.GameObjects
 {
-    class Ship : Character
+    class Ship : MonoBehaviour, IMoveable
     {
         private float _maxVelocityY;
         private float _xDeceleration;
+        private Character _character;
 
         public void Init(
             Rigidbody2D rb,
@@ -18,36 +20,44 @@ namespace GH.Scripts.GameObjects
             float xDeceleration,
             Action<Directions> flipSprite,
             KeyCode ability1,
-            KeyCode ability2)
+            KeyCode ability2,
+            Character character)
         {
-            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
+            _character = character;
             _maxVelocityY = maxVelocityY;
             _xDeceleration = xDeceleration;
+
+            _character.Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
         }
 
-        public override void Move()
+        public void Move()
         {
-            UpdateGravity();
+            _character.UpdateGravity();
 
-            RigidBody.velocity = new Vector2(RigidBody.velocity.x * _xDeceleration, RigidBody.velocity.y);
+            _character.RigidBody.velocity = new Vector2(_character.RigidBody.velocity.x * _xDeceleration, _character.RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-SpeedX);
+                _character.MoveHorizontally(-_character.SpeedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(SpeedX);
+                _character.MoveHorizontally(_character.SpeedX);
 
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 // Math.Max and Mathf.Max doesn't like me
                 
-                var nextVelocityY = RigidBody.velocity.y + SpeedY;
+                var nextVelocityY = _character.RigidBody.velocity.y + _character.SpeedY;
 
                 if (nextVelocityY > _maxVelocityY)
                     nextVelocityY = _maxVelocityY;
 
-                RigidBody.velocity = new Vector2(RigidBody.velocity.x, nextVelocityY);
+                _character.RigidBody.velocity = new Vector2(_character.RigidBody.velocity.x, nextVelocityY);
             }
+        }
+
+        public void Destroy()
+        {
+            Destroy(this);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

@@ -36,9 +36,10 @@ namespace GH.Scripts
                     { PlayerState.Ship, shipSprite }
                 },
                 abilityKey1,
-                abilityKey2);
+                abilityKey2,
+                raycasts);
             
-            _gameObjectManager.AddMoveable(PlayerState.Cube, raycasts);
+            _gameObjectManager.AddMoveable(PlayerState.Cube);
             _gameObjectManager.AddMoveable(PlayerState.Ship); 
         }
 

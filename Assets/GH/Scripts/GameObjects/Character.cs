@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace GH.Scripts.GameObjects
 {
-    abstract class Character : MonoBehaviour, IMoveable
+    public abstract class Character : IMoveable
     {
-        protected Rigidbody2D RigidBody;
-        protected float SpeedX;
-        protected float SpeedY;
+        public Rigidbody2D RigidBody;
+        public float SpeedX;
+        public float SpeedY;
         private float _gravityScale;
         private Action<Directions> _flipSprite;
-        protected KeyCode AbilityKey1;
-        protected KeyCode AbilityKey2;
+        public KeyCode AbilityKey1;
+        public KeyCode AbilityKey2;
 
-        protected void Init(
+        public void Init(
             Rigidbody2D rb,
             float xSpeed,
             float ySpeed,
@@ -34,8 +34,9 @@ namespace GH.Scripts.GameObjects
         }
 
         public abstract void Move();
+        public abstract void Destroy();
 
-        protected void MoveHorizontally(float speed)
+        public void MoveHorizontally(float speed)
         {
             RigidBody.velocity = new Vector2(speed, RigidBody.velocity.y);
 
@@ -43,16 +44,18 @@ namespace GH.Scripts.GameObjects
             {
                 var direction = Directions.None;
 
-                if (speed > 0)
-                    direction |= Directions.Right;
-                else if (speed < 0)
-                    direction |= Directions.Left;
+                direction |= speed switch
+                {
+                    > 0 => Directions.Right,
+                    < 0 => Directions.Left,
+                    _ => Directions.None
+                };
 
                 _flipSprite(direction);
             }
         }
 
-        protected void UpdateGravity()
+        public void UpdateGravity()
             => RigidBody.gravityScale = _gravityScale;
     }
 }
