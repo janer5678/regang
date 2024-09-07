@@ -8,6 +8,7 @@ public class gunscript : MonoBehaviour
     // Start is called before the first frame update
     public Transform playerTransform;
     public GameObject myPrefab;
+    public GameObject myPrefab2;
     public float throwForce = 10f;
 
     public GameObject Player;
@@ -73,6 +74,12 @@ public class gunscript : MonoBehaviour
             Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
             player.timer1 = 200;
             
+        }
+        if (Input.GetKey(KeyCode.B) && player.timer2 == 0)
+        {
+            Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
+            player.timer2 = 4000;
+
         }
     }
 }

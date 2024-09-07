@@ -6,13 +6,14 @@ public class player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 3f;
+    public float speed = 4f;
     public float jumpingPower = 4f;
 
 
     public float radius = 0.2f;
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform groundCheck2;
 
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -26,10 +27,13 @@ public class player : MonoBehaviour
 
     public static bool staticGunFliped;
     public static int timer1 = 0;
+    public static int timer2 = 0;
+    public static GameObject pl;
 
     // Start is called before the first frame update
     void Start()
     {
+        pl = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
        spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -48,6 +52,10 @@ public class player : MonoBehaviour
         if (timer1 != 0)
         {
             timer1--;
+        }
+        if (timer2 != 0)
+        {
+            timer2--;
         }
         horizontal = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -74,7 +82,7 @@ public class player : MonoBehaviour
         rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow)) && IsGrounded())
+        if ((Input.GetKey(KeyCode.UpArrow)) && IsGrounded())
         {
             animator.SetBool("jumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
@@ -126,6 +134,37 @@ public class player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, radius, groundlayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundlayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);
+        UnityEngine.Debug.DrawRay(groundCheck.position, Vector2.down * hit.distance, Color.red);
+
+        if (hit.collider != null || hit2.collider != null)
+        {
+            return true;
+        }
+        return false;
+    }
+    private IEnumerator jumpReset()
+    {
+        yield return new WaitForSeconds(3);
+        jumpingPower = jumpingPower / 1.75f;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("jumpboostorb"))
+        {
+            Destroy(collision.gameObject);
+            powerupjump.a = true;
+            jumpingPower = jumpingPower * 1.75f;
+            StartCoroutine(jumpReset());
+        }
+        if (collision.gameObject.CompareTag("freemoveorb"))
+        {
+            Destroy(collision.gameObject);
+            orbspawner.a = true;
+            timer2 = 0;
+        }
     }
 }

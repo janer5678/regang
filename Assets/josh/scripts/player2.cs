@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class player2 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 3f;
+    public float speed = 4f;
     public float jumpingPower = 4f;
     public static bool kill = false;
     private float jumping = 0f;
@@ -46,16 +47,18 @@ public class player2 : MonoBehaviour
     public static float timer2 = 0;
     public static bool blocking2 = false;
     public GameObject object1;
-    private float speed2 = 3f;
+    private float speed2 = 4f;
+    public static GameObject pl2;
 
     // Start is called before the first frame update
     void Start()
     {
+        pl2 = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         ability = ability + UnityEngine.Random.Range(1, 4) - 1;
         originalColor = spriteRenderer.color;
-        ability = 6;
+        ability = 2;
 
     }
     void FlipSprite()
@@ -97,13 +100,13 @@ public class player2 : MonoBehaviour
     private IEnumerator Invincible()
     {
         object1.SetActive(true);
-        speed2 = speed2 / 1.3f;
+        speed2 = speed2 / 1.6f;
         boxCollider.enabled = false;
         boxCollider2.enabled = false;
         spriteRenderer.color = Color.grey;
         yield return new WaitForSeconds(5f);
         object1.SetActive(false);
-        speed2 = speed2 * 1.3f;
+        speed2 = speed2 * 1.6f;
         boxCollider.enabled = true;
         boxCollider2.enabled = true;
         spriteRenderer.color = originalColor;
@@ -267,7 +270,7 @@ public class player2 : MonoBehaviour
         if ((reverseControls2 ? Input.GetKey(KeyCode.W) : Input.GetKey(KeyCode.S)) && IsGrounded())
         {
             animator.SetBool("crouch", true);
-            speed = speed2/3;
+            speed = speed2/2;
             boxCollider.enabled = false;
             if (a)
             {
@@ -330,4 +333,28 @@ public class player2 : MonoBehaviour
         }
         return false;
     }
+    private IEnumerator jumpReset()
+    {
+        yield return new WaitForSeconds(3);
+        jumpingPower = jumpingPower / 1.75f;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("jumpboostorb"))
+        {
+            Destroy(collision.gameObject);
+            powerupjump.a = true;
+            jumpingPower = jumpingPower * 1.75f;
+            StartCoroutine(jumpReset());
+        }
+        if (collision.gameObject.CompareTag("orb2"))
+        {
+            Destroy(collision.gameObject);
+            orbspawner.a = true;
+            timer1 = 0;
+        }
+    }
+    
 }
