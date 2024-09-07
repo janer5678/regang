@@ -6,12 +6,7 @@ namespace Assets.GH
 {    
     public class GDMovement : MonoBehaviour
     {
-        private PlayerState playerState;
-
         public GameObject[] raycasts;
-        public float SPEED_X = 5.0f;
-        public float SPEED_Y = 10.0f;
-        public float GRAVITY_SCALE = 1.0f;
 
         private IGameObjectManager _gameObjectManager;
 
@@ -22,17 +17,18 @@ namespace Assets.GH
             var spriteRenderer = GetComponent<SpriteRenderer>();
 
             _gameObjectManager = new GameObjectManager(rb);
+            _gameObjectManager.AddMoveable(PlayerState.Cube, raycasts);
+            _gameObjectManager.AddMoveable(PlayerState.Ship); 
         }
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
+                _gameObjectManager.TogglePlayerState();
             }
 
-            _gameObjectManager.AddMoveable(playerState, SPEED_X, SPEED_Y, GRAVITY_SCALE, raycasts);
-            _gameObjectManager.Move(playerState);
+            _gameObjectManager.Move();
         }
     }
 }

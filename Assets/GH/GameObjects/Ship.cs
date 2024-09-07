@@ -5,12 +5,10 @@ namespace Assets.GH.GameObjects
     class Ship : Moveable
     {
         const float MAX_Y_VELOCITY = 5.0f;
-        const float SHIP_GRAVITY_SCALE = 2f;
-        const float Y_ACCELERATION = 0.08f;
         const float X_DECELERATION = 0.6f;
 
-        public Ship(Rigidbody2D rb, float xSpeed, float ySpeed) 
-            : base(rb, xSpeed, ySpeed, SHIP_GRAVITY_SCALE)
+        public Ship(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale)
+            : base(rb, xSpeed, ySpeed, gravityScale)
         {
 
         }
@@ -29,7 +27,7 @@ namespace Assets.GH.GameObjects
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                var nextVelocityY = _rb.velocity.y + Y_ACCELERATION;
+                var nextVelocityY = _rb.velocity.y + SPEED_Y;
 
                 if (nextVelocityY > MAX_Y_VELOCITY) 
                     nextVelocityY = MAX_Y_VELOCITY;
