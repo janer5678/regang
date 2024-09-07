@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GH.Scripts2
+namespace GH.Scripts
 {
     public class BehaviourManager : MonoBehaviour
     {

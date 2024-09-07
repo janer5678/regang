@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GH.Scripts2.Cube
+namespace GH.Scripts.Cube
 {
     public class Movement : Player
     {

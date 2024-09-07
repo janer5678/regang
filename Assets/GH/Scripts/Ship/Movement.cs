@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GH.Scripts2.Ship
+namespace GH.Scripts.Ship
 {
     public class Movement : Player
     {
