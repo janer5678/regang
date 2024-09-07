@@ -21,7 +21,7 @@ namespace GH.Scripts
         private IGameObjectManager _gameObjectManager;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             var rb = GetComponent<Rigidbody2D>();
             var spriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,7 +42,7 @@ namespace GH.Scripts
             _gameObjectManager.AddMoveable(PlayerState.Ship); 
         }
 
-        void Update()
+        private void Update()
         {
             // TODO: remove this, move to Cube and Ship to handle
             if (Input.GetKeyDown(KeyCode.Space))

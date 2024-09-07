@@ -59,8 +59,8 @@ namespace GH.Scripts.GameObjects
 
         public void Update()
         {
-            if (_moveableMap.ContainsKey(_playerState))
-                _moveableMap[_playerState].Move();
+            if (_moveableMap.TryGetValue(_playerState, out var value))
+                value.Move();
         }
 
         public void SwitchPlayerState()
@@ -69,7 +69,7 @@ namespace GH.Scripts.GameObjects
             _spriteRenderer.sprite = _sprites[_playerState];
         }
 
-        void FlipSprite(Directions directions)
+        private void FlipSprite(Directions directions)
         {
             if ((directions & Directions.Right) != Directions.None)
             {

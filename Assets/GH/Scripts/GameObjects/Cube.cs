@@ -8,8 +8,8 @@ namespace GH.Scripts.GameObjects
     {
         private GameObject[] _raycasts;
 
-        private bool canJump = false;
-        private bool canDrop = false;
+        private bool _canJump = false;
+        private bool _canDrop = false;
 
         public void Init(
             Rigidbody2D rb,
@@ -29,38 +29,38 @@ namespace GH.Scripts.GameObjects
         {
             UpdateGravity();
 
-            _rb.velocity = new Vector2(0, _rb.velocity.y);
+            RigidBody.velocity = new Vector2(0, RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-_speedX);
+                MoveHorizontally(-SpeedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(_speedX);
+                MoveHorizontally(SpeedX);
 
-            if (Input.GetKey(KeyCode.UpArrow) && canJump)
+            if (Input.GetKey(KeyCode.UpArrow) && _canJump)
             {
-                canJump = false;
-                canDrop = true;
-                _rb.velocity = new Vector2(_rb.velocity.x, _speedY);
+                _canJump = false;
+                _canDrop = true;
+                RigidBody.velocity = new Vector2(RigidBody.velocity.x, SpeedY);
             }
 
-            if (Input.GetKey(KeyCode.DownArrow) && canDrop)
+            if (Input.GetKey(KeyCode.DownArrow) && _canDrop)
             {
-                canDrop = false;
-                _rb.velocity = new Vector2(_rb.velocity.x, -_speedY * 1.1f);
+                _canDrop = false;
+                RigidBody.velocity = new Vector2(RigidBody.velocity.x, -SpeedY * 1.1f);
             }
 
             foreach (var raycast in _raycasts)
             {
-                RaycastHit2D hit = Physics2D.Raycast(raycast.transform.position, -Vector2.up, 0.1f);
+                var hit = Physics2D.Raycast(raycast.transform.position, -Vector2.up, 0.1f);
 
                 if (hit)
-                    canJump = true;
+                    _canJump = true;
 
                 Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
             }
         }
 
-        void Dash()
+        private void Dash()
         {
 
         }

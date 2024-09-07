@@ -7,15 +7,15 @@ namespace GH.Scripts.GameObjects
 {
     abstract class Character : MonoBehaviour, IMoveable
     {
-        protected Rigidbody2D _rb;
-        protected float _speedX;
-        protected float _speedY;
-        protected float _gravityScale;
-        protected Action<Directions> _flipSprite;
-        protected KeyCode _ability1;
-        protected KeyCode _ability2;
+        protected Rigidbody2D RigidBody;
+        protected float SpeedX;
+        protected float SpeedY;
+        private float _gravityScale;
+        private Action<Directions> _flipSprite;
+        protected KeyCode AbilityKey1;
+        protected KeyCode AbilityKey2;
 
-        public void Init(
+        protected void Init(
             Rigidbody2D rb,
             float xSpeed,
             float ySpeed,
@@ -24,20 +24,20 @@ namespace GH.Scripts.GameObjects
             KeyCode ability1,
             KeyCode ability2)
         {
-            _rb = rb;
-            _speedX = xSpeed;
-            _speedY = ySpeed;
+            RigidBody = rb;
+            SpeedX = xSpeed;
+            SpeedY = ySpeed;
             _gravityScale = gravityScale;
             _flipSprite = flipSprite;
-            _ability1 = ability1;
-            _ability2 = ability2;
+            AbilityKey1 = ability1;
+            AbilityKey2 = ability2;
         }
 
         public abstract void Move();
 
         protected void MoveHorizontally(float speed)
         {
-            _rb.velocity = new Vector2(speed, _rb.velocity.y);
+            RigidBody.velocity = new Vector2(speed, RigidBody.velocity.y);
 
             if (_flipSprite is not null)
             {
@@ -53,6 +53,6 @@ namespace GH.Scripts.GameObjects
         }
 
         protected void UpdateGravity()
-            => _rb.gravityScale = _gravityScale;
+            => RigidBody.gravityScale = _gravityScale;
     }
 }

@@ -29,28 +29,28 @@ namespace GH.Scripts.GameObjects
         {
             UpdateGravity();
 
-            _rb.velocity = new Vector2(_rb.velocity.x * _xDeceleration, _rb.velocity.y);
+            RigidBody.velocity = new Vector2(RigidBody.velocity.x * _xDeceleration, RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-_speedX);
+                MoveHorizontally(-SpeedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(_speedX);
+                MoveHorizontally(SpeedX);
 
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 // Math.Max and Mathf.Max doesn't like me
                 
-                var nextVelocityY = _rb.velocity.y + _speedY;
+                var nextVelocityY = RigidBody.velocity.y + SpeedY;
 
                 if (nextVelocityY > _maxVelocityY)
                     nextVelocityY = _maxVelocityY;
 
-                _rb.velocity = new Vector2(_rb.velocity.x, nextVelocityY);
+                RigidBody.velocity = new Vector2(RigidBody.velocity.x, nextVelocityY);
             }
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("player"))
             {
