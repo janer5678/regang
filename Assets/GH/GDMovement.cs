@@ -11,6 +11,7 @@ namespace Assets.GH
         public GameObject[] raycasts;
         public float SPEED_X = 5.0f;
         public float SPEED_Y = 10.0f;
+        public float GRAVITY_SCALE = 1.0f;
 
         private IGameObjectManager _gameObjectManager;
 
@@ -30,7 +31,7 @@ namespace Assets.GH
                 playerState = playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
             }
 
-            _gameObjectManager.AddMoveable(playerState, SPEED_X, SPEED_Y, raycasts);
+            _gameObjectManager.AddMoveable(playerState, SPEED_X, SPEED_Y, GRAVITY_SCALE, raycasts);
             _gameObjectManager.Move(playerState);
         }
     }

@@ -9,14 +9,16 @@ namespace Assets.GH.GameObjects
         private bool canJump = false;
         private bool canDrop = false;
 
-        public Cube(Rigidbody2D rb, float xSpeed, float ySpeed, GameObject[] raycasts) 
-            : base(rb, xSpeed, ySpeed)
+        public Cube(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale, GameObject[] raycasts) 
+            : base(rb, xSpeed, ySpeed, gravityScale)
         {
             _raycasts = raycasts;
         }
 
         public override void Move()
         {
+            UpdateGravity();
+
             _rb.velocity = new Vector2(0, _rb.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -47,8 +49,5 @@ namespace Assets.GH.GameObjects
                 Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
             }
         }
-
-        void MoveHorizontally(float speed)
-            => _rb.velocity = new Vector2(speed, _rb.velocity.y);
     }
 }
