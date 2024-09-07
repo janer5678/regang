@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 109714752}
   - component: {fileID: 109714753}
   m_Layer: 0
-  m_Name: Player_multi
+  m_Name: GH_Cube_Player
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1500,8 +1500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04eff041965493fb7d4a1e400185c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 5
-  ySpeed: 5
 --- !u!1 &2111761783
 GameObject:
   m_ObjectHideFlags: 0
