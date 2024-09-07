@@ -1,3 +1,5 @@
+// Unity version: 2022.3.24f1
+
 using Assets.GH.GameObjects;
 using Assets.GH.GameObjects.Contracts;
 using UnityEngine;
@@ -9,6 +11,8 @@ namespace Assets.GH
         public GameObject[] raycasts;
         public Sprite cubeSprite;
         public Sprite shipSprite;
+        public KeyCode abilityKey1;
+        public KeyCode abilityKey2;
 
         private IGameObjectManager _gameObjectManager;
 
@@ -26,7 +30,9 @@ namespace Assets.GH
                 {
                     { PlayerState.Cube, cubeSprite },
                     { PlayerState.Ship, shipSprite }
-                });
+                },
+                abilityKey1,
+                abilityKey2);
             
             _gameObjectManager.AddMoveable(PlayerState.Cube, raycasts);
             _gameObjectManager.AddMoveable(PlayerState.Ship); 

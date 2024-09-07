@@ -11,19 +11,25 @@ namespace Assets.GH.GameObjects
         protected float _speedY;
         protected float _gravityScale;
         protected Action<Directions> _flipSprite;
+        protected KeyCode _ability1;
+        protected KeyCode _ability2;
 
         public void Init(
             Rigidbody2D rb,
             float xSpeed,
             float ySpeed,
             float gravityScale,
-            Action<Directions> flipSprite)
+            Action<Directions> flipSprite,
+            KeyCode ability1,
+            KeyCode ability2)
         {
             _rb = rb;
             _speedX = xSpeed;
             _speedY = ySpeed;
             _gravityScale = gravityScale;
             _flipSprite = flipSprite;
+            _ability1 = ability1;
+            _ability2 = ability2;
         }
 
         public abstract void Move();

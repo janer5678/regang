@@ -11,16 +11,26 @@ namespace Assets.GH.GameObjects
         private readonly SpriteRenderer _spriteRenderer;
         private readonly Dictionary<PlayerState, Sprite> _sprites;
         private readonly GameObject _gameObject;
+        private readonly KeyCode _ability1;
+        private readonly KeyCode _ability2;
 
         private PlayerState _playerState;
 
-        public GameObjectManager(GameObject gameObject, Rigidbody2D rb, SpriteRenderer spriteRenderer, Dictionary<PlayerState, Sprite> sprites)
+        public GameObjectManager(
+            GameObject gameObject, 
+            Rigidbody2D rb, 
+            SpriteRenderer spriteRenderer, 
+            Dictionary<PlayerState, Sprite> sprites, 
+            KeyCode ability1, 
+            KeyCode ability2)
         {
             _gameObject = gameObject;
             _playerState = PlayerState.Cube;
             _rb = rb;
             _spriteRenderer = spriteRenderer;
             _sprites = sprites;
+            _ability1 = ability1;
+            _ability2 = ability2;
         }
 
         public void AddMoveable(PlayerState state, GameObject[] raycasts = null)
@@ -33,14 +43,14 @@ namespace Assets.GH.GameObjects
                 case PlayerState.Cube:
                 {
                     var cube = _gameObject.AddComponent<Cube>();
-                    cube.Init(_rb, 6f, 6f, 1f, raycasts, FlipSprite);
+                    cube.Init(_rb, 6f, 6f, 1f, raycasts, FlipSprite, _ability1, _ability2);
                     _moveableMap.Add(state, cube);
                 } break;
 
                 case PlayerState.Ship:
                 {
                     var ship = _gameObject.AddComponent<Ship>();
-                    ship.Init(_rb, 6f, 0.08f, 2f, 8f, 0.6f, FlipSprite);
+                    ship.Init(_rb, 6f, 0.08f, 2f, 8f, 0.6f, FlipSprite, _ability1, _ability2);
                     _moveableMap.Add(state, ship);
                 } break;
             }

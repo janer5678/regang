@@ -16,9 +16,11 @@ namespace Assets.GH.GameObjects
             float ySpeed,
             float gravityScale,
             GameObject[] raycasts,
-            Action<Directions> flipSprite)
+            Action<Directions> flipSprite,
+            KeyCode ability1,
+            KeyCode ability2)
         {
-            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite);
+            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
             _raycasts = raycasts;
         }
 
@@ -56,5 +58,13 @@ namespace Assets.GH.GameObjects
                 Debug.DrawRay(raycast.transform.position, -Vector2.up * 0.1f, Color.red);
             }
         }
+
+        void Dash()
+        {
+
+        }
     }
 }
+
+// dash (touch somebody kills them)
+// use ability turn into ship

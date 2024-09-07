@@ -15,9 +15,11 @@ namespace Assets.GH.GameObjects
             float gravityScale,
             float maxVelocityY,
             float xDeceleration,
-            Action<Directions> flipSprite)
+            Action<Directions> flipSprite,
+            KeyCode ability1,
+            KeyCode ability2)
         {
-            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite);
+            Init(rb, xSpeed, ySpeed, gravityScale, flipSprite, ability1, ability2);
             _maxVelocityY = maxVelocityY;
             _xDeceleration = xDeceleration;
         }
@@ -56,3 +58,8 @@ namespace Assets.GH.GameObjects
         }
     }
 }
+
+// auto fire missiles
+
+// shrink hitbox but missiles size remains same
+// drop bomb
