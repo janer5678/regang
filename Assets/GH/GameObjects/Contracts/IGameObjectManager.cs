@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Assets.GH.Enums;
 
 namespace Assets.GH.GameObjects.Contracts
 {
@@ -6,6 +7,6 @@ namespace Assets.GH.GameObjects.Contracts
     {
         void AddMoveable(PlayerState playerState, GameObject[] raycasts = null);
         void Update();
-        void TogglePlayerState();
+        void SwitchPlayerState();
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using Assets.GH.Enums;
 
 namespace Assets.GH.GameObjects
 {
-    class Cube : Moveable
+    class Cube : Character
     {
         private GameObject[] _raycasts;
 

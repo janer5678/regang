@@ -1,5 +1,6 @@
 // Unity version: 2022.3.24f1
 
+using Assets.GH.Enums;
 using Assets.GH.GameObjects;
 using Assets.GH.GameObjects.Contracts;
 using UnityEngine;
@@ -42,7 +43,7 @@ namespace Assets.GH
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _gameObjectManager.TogglePlayerState();
+                _gameObjectManager.SwitchPlayerState();
             }
 
             _gameObjectManager.Update();

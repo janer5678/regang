@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using Assets.GH.Enums;
 
 namespace Assets.GH.GameObjects
 {
-    class Ship : Moveable
+    class Ship : Character
     {
         private float _maxVelocityY;
         private float _xDeceleration;

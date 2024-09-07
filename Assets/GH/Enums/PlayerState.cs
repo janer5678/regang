@@ -1,4 +1,4 @@
-namespace Assets.GH
+namespace Assets.GH.Enums
 {
     enum PlayerState
     {

@@ -1,6 +1,7 @@
 ﻿using Assets.GH.GameObjects.Contracts;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.GH.Enums;
 
 namespace Assets.GH.GameObjects
 {
@@ -62,7 +63,7 @@ namespace Assets.GH.GameObjects
                 _moveableMap[_playerState].Move();
         }
 
-        public void TogglePlayerState()
+        public void SwitchPlayerState()
         {
             _playerState = _playerState == PlayerState.Cube ? PlayerState.Ship : PlayerState.Cube;
             _spriteRenderer.sprite = _sprites[_playerState];

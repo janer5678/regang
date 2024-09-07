@@ -1,10 +1,11 @@
 ﻿using Assets.GH.GameObjects.Contracts;
 using System;
 using UnityEngine;
+using Assets.GH.Enums;
 
 namespace Assets.GH.GameObjects
 {
-    abstract class Moveable : MonoBehaviour, IMoveable
+    abstract class Character : MonoBehaviour, IMoveable
     {
         protected Rigidbody2D _rb;
         protected float _speedX;
