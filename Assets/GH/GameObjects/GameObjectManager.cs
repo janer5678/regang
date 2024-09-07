@@ -31,7 +31,7 @@ namespace Assets.GH.GameObjects
 
                 case PlayerState.Ship:
                 {
-                    _moveableMap.Add(state, new Ship(_rb, 6f, 0.08f, 1f));
+                    _moveableMap.Add(state, new Ship(_rb, 6f, 0.08f, 2f, 8f, 0.6f));
                 } break;
             }
         }

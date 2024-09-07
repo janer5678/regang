@@ -4,33 +4,34 @@ namespace Assets.GH.GameObjects
 {
     class Ship : Moveable
     {
-        const float MAX_Y_VELOCITY = 5.0f;
-        const float X_DECELERATION = 0.6f;
+        private readonly float _maxVelocityY;
+        private readonly float _xDeceleration;
 
-        public Ship(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale)
+        public Ship(Rigidbody2D rb, float xSpeed, float ySpeed, float gravityScale, float maxVelocityY, float xDeceleration)
             : base(rb, xSpeed, ySpeed, gravityScale)
         {
-
+            _maxVelocityY = maxVelocityY;
+            _xDeceleration = xDeceleration;
         }
 
         public override void Move()
         {
             UpdateGravity();
 
-            _rb.velocity = new Vector2(_rb.velocity.x * X_DECELERATION * Time.deltaTime, _rb.velocity.y);
+            _rb.velocity = new Vector2(_rb.velocity.x * _xDeceleration, _rb.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-SPEED_X);
+                MoveHorizontally(-_speedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(SPEED_X);
+                MoveHorizontally(_speedX);
 
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                var nextVelocityY = _rb.velocity.y + SPEED_Y;
+                var nextVelocityY = _rb.velocity.y + _speedY;
 
-                if (nextVelocityY > MAX_Y_VELOCITY) 
-                    nextVelocityY = MAX_Y_VELOCITY;
+                if (nextVelocityY > _maxVelocityY) 
+                    nextVelocityY = _maxVelocityY;
                 
                 _rb.velocity = new Vector2(_rb.velocity.x, nextVelocityY);
             }

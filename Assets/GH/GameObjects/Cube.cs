@@ -22,21 +22,21 @@ namespace Assets.GH.GameObjects
             _rb.velocity = new Vector2(0, _rb.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
-                MoveHorizontally(-SPEED_X);
+                MoveHorizontally(-_speedX);
             if (Input.GetKey(KeyCode.RightArrow))
-                MoveHorizontally(SPEED_X);
+                MoveHorizontally(_speedX);
 
             if (Input.GetKey(KeyCode.UpArrow) && canJump)
             {
                 canJump = false;
                 canDrop = true;
-                _rb.velocity = new Vector2(_rb.velocity.x, SPEED_Y);
+                _rb.velocity = new Vector2(_rb.velocity.x, _speedY);
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && canDrop)
             {
                 canDrop = false;
-                _rb.velocity = new Vector2(_rb.velocity.x, -SPEED_Y * 1.1f);
+                _rb.velocity = new Vector2(_rb.velocity.x, -_speedY * 1.1f);
             }
 
             foreach (var raycast in _raycasts)
