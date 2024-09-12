@@ -55,7 +55,7 @@ public class player2 : MonoBehaviour
     float attack2;
     float down;
     float up;
-
+    public static bool invincible = false;
 
     public static float attack1;
     Josh2Controls controls;
@@ -148,8 +148,11 @@ public class player2 : MonoBehaviour
         speed2 = speed2 / 1.6f;
         boxCollider.enabled = false;
         boxCollider2.enabled = false;
+        invincible = true;
         spriteRenderer.color = Color.grey;
+        
         yield return new WaitForSeconds(5f);
+        invincible = false;
         object1.SetActive(false);
         speed2 = speed2 * 1.6f;
         boxCollider.enabled = true;

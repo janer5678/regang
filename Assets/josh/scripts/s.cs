@@ -53,6 +53,10 @@ public class s : MonoBehaviour
         {
             return;
         }
+        if (collision.gameobject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
         if (i == 0 && collision.gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);

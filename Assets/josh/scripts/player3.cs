@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class player3 : MonoBehaviour
@@ -26,6 +28,7 @@ public class player3 : MonoBehaviour
     public static bool staticGunFliped;
     public static int timer1 = 0;
     public static int timer2 = 0;
+    public static int timer3 = 0;
     public static int shield = 1;
     public static int shieldmax = 1;
     public static bool invincible = false;
@@ -78,7 +81,7 @@ public class player3 : MonoBehaviour
         yield return new WaitForSeconds(i);
         invincible = false;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -89,6 +92,10 @@ public class player3 : MonoBehaviour
         if (timer2 != 0)
         {
             timer2 = timer2 - 1;
+        }
+        if (timer3 != 0)
+        {
+            timer3 = timer3 - 1;
         }
         if (Input.GetKey(KeyCode.M) && timer1 == 0)
         {
@@ -101,7 +108,29 @@ public class player3 : MonoBehaviour
             StartCoroutine(ability2());
 
         }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            float randomValue = Random.value;
 
+            if (randomValue <= 0.4f)
+            {
+                shieldmax++;
+            }
+            randomValue = Random.value;
+            if (randomValue <= 0.2f)
+            {
+                shieldmax--;
+            }
+            timer3 = 1500;
+        }
+        if (shieldmax == 0)
+        {
+            object1.SetActive(false);
+        }
+        if (shieldmax > 0)
+        {
+            object1.SetActive(true);
+        }
 
         horizontal = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -135,15 +164,7 @@ public class player3 : MonoBehaviour
         
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
-        {
-            Destroy(collision.gameObject);
-            shieldmax++;
-            shield = shieldmax;
-        }
-    }
+   
 
 
 
@@ -186,6 +207,16 @@ public class player3 : MonoBehaviour
             orbspawner.a = true;
             timer2 = 0;
             timer1 = 0;
+        }
+        if (collision.gameobject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("player"))
+        {
+            Destroy(collision.gameObject);
+            shieldmax++;
+            shield = shieldmax;
         }
     }
 }

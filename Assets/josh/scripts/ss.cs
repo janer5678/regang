@@ -44,6 +44,10 @@ public class ss : MonoBehaviour
         {
             return;
         }
+        if (collision.gameobject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("wall"))
         {
             Destroy(gameObject);
