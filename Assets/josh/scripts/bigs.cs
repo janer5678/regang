@@ -49,7 +49,14 @@ public class bigs : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameobject == player3.pl3 && player3.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameobject == CompareTag("shield"))
+        {
+            return;
+        }
         if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player2.pl2 && !collision.gameObject.CompareTag("bigboomerang"))
         {
             Destroy(collision.gameObject);

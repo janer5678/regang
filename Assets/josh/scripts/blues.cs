@@ -37,8 +37,15 @@ public class blues : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("bigboomerang") && !collision.gameObject.CompareTag("player2") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
+        if (collision.gameobject == player3.pl3 && player3.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameobject == CompareTag("shield") )
+        {
+            return;
+        }
+        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("bigboomerang") && collision.gameObject != player2.pl2 && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);

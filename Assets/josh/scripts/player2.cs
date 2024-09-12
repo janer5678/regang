@@ -196,7 +196,7 @@ public class player2 : MonoBehaviour
         }
         if (timer1 != 0 )
         {
-            timer1--;
+            timer1 = timer1 - 4;
         }
         if (timer2 != 0)
         {

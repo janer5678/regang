@@ -84,20 +84,20 @@ public class player3 : MonoBehaviour
     {
         if (timer1 != 0)
         {
-            timer1--;
+            timer1 = timer1 - 1;
         }
         if (timer2 != 0)
         {
-            timer2--;
+            timer2 = timer2 - 1;
         }
         if (Input.GetKey(KeyCode.M) && timer1 == 0)
         {
-            timer1 = 5000;
+            timer1 = 4000;
             StartCoroutine(ability1());
         }
         if (Input.GetKey(KeyCode.K) && timer2 == 0)
         {
-            timer2 = 5000;
+            timer2 = 4000;
             StartCoroutine(ability2());
 
         }

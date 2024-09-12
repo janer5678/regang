@@ -36,6 +36,14 @@ public class ss : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameobject == player3.pl3 && player3.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameobject == CompareTag("shield"))
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("wall"))
         {
             Destroy(gameObject);
