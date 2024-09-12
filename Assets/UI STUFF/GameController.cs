@@ -7,11 +7,13 @@ public class GameController : MonoBehaviour
 {
     public static int Player1char;
     public static int Player2char;
+    public static int Player3char;
 
     public static int NumPlayers;
 
     public static bool blueSelected;
     public static bool redSelected;
+    public static bool yellowSelected;
 
     private void Update()
     {

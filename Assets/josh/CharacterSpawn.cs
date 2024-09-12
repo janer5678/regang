@@ -6,6 +6,7 @@ public class CharacterSpawn : MonoBehaviour
 {
     private Vector2 Player1Spawn;
     private Vector2 Player2Spawn;
+    private Vector2 Player3Spawn;
 
     private Vector2 spawnPoint1 = new Vector2(-5.9f, 0.65f);
     private Vector2 spawnPoint2 = new Vector2(-0.04f, 2.2f);
@@ -36,14 +37,28 @@ public class CharacterSpawn : MonoBehaviour
 
         Player2Spawn = selectedOption2;
 
-        print(StaticScript.player1character);
+        //set spawn 3 
+
+        options.RemoveAt(randomIndex2);
+
+        int randomIndex3 = Random.Range(0, options.Count);
+
+        Vector2 selectedOption3 = options[randomIndex3];
+
+        Player3Spawn = selectedOption3;
+
+
+
 
         Players[StaticScript.player1character - 1].SetActive(true);
         Players[StaticScript.player2character - 1].SetActive(true);
+        Players[StaticScript.player3character - 1].SetActive(true);
+
 
         Players[StaticScript.player1character - 1].transform.position = Player1Spawn;
 
         Players[StaticScript.player2character - 1].transform.position = Player2Spawn;
+        Players[StaticScript.player3character - 1].transform.position = Player3Spawn;
     }
 
 

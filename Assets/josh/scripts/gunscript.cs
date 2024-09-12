@@ -68,17 +68,45 @@ public class gunscript : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.N) && player.timer1 == 0)
-        {
-            Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-            player.timer1 = 200;
-            
-        }
-        if (Input.GetKey(KeyCode.B) && player.timer2 == 0)
-        {
-            Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-            player.timer2 = 4000;
 
+        if (StaticScript.player1character == 1)
+        {
+            if (Input.GetKey(KeyCode.Slash) && player.timer1 == 0)
+            {
+                Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+                player.timer1 = 200;
+                
+            }
         }
+        else if (StaticScript.player2character == 1)
+        {
+            if (Input.GetKey(KeyCode.Q) && player.timer1 == 0)
+            {
+                Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+                player.timer1 = 200;
+                
+            }
+        }
+
+        if (StaticScript.player1character == 1)
+        {
+            if (Input.GetKey(KeyCode.Period) && player.timer2 == 0)
+            {
+                Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
+                player.timer2 = 4000;
+
+            }
+        }
+        else if (StaticScript.player2character == 1)
+        {
+            if (Input.GetKey(KeyCode.Alpha1) && player.timer2 == 0)
+            {
+                Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
+                player.timer2 = 4000;
+
+            }
+        }
+
+
     }
 }

@@ -35,7 +35,7 @@ public class player : MonoBehaviour
     {
         pl = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
-       spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
     void FlipSprite()
@@ -58,14 +58,32 @@ public class player : MonoBehaviour
             timer2--;
         }
         horizontal = 0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+
+        if (StaticScript.player1character == 1)
         {
-            horizontal = -1f;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = 1f;
+            }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (StaticScript.player2character == 1)
         {
-            horizontal = 1f;
+            if (Input.GetKey(KeyCode.A))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                horizontal = 1f;
+            }
         }
+
+
+
 
         if (horizontal > 0 && isFlipped)
         {
@@ -82,43 +100,94 @@ public class player : MonoBehaviour
         rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 
 
-        if ((Input.GetKey(KeyCode.UpArrow)) && IsGrounded())
+        if (StaticScript.player1character == 1)
         {
-            animator.SetBool("jumping", true);
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
-        }
-
-
-
-        if (Input.GetKey(KeyCode.DownArrow) && IsGrounded())
-        {
-
-            animator.SetBool("crouch", true);
-            speed = 1;
-            boxCollider.enabled = false;
-            if (a == true)
+            if ((Input.GetKey(KeyCode.UpArrow)) && IsGrounded())
             {
-                crouchNow = true;
-                a = false;
+                animator.SetBool("jumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
             }
-            b = true;
-
-
         }
-        else
+        else if (StaticScript.player2character == 1)
         {
-            animator.SetBool("crouch", false);
-            speed = 3;
-
-            boxCollider.enabled = true;
-            if (b == true)
+            if ((Input.GetKey(KeyCode.W)) && IsGrounded())
             {
-                notcrouchNow = true;
-                b = false;
+                animator.SetBool("jumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
             }
-            a= true;
         }
+
+        
+
+        if (StaticScript.player1character == 1)
+        {
+            if (Input.GetKey(KeyCode.DownArrow) && IsGrounded())
+            {
+
+                animator.SetBool("crouch", true);
+                speed = 1;
+                boxCollider.enabled = false;
+                if (a == true)
+                {
+                    crouchNow = true;
+                    a = false;
+                }
+                b = true;
+
+
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = 3;
+
+                boxCollider.enabled = true;
+                if (b == true)
+                {
+                    notcrouchNow = true;
+                    b = false;
+                }
+                a= true;
+            }
+        }
+        else if (StaticScript.player2character == 1)
+        {
+            if (Input.GetKey(KeyCode.S) && IsGrounded())
+            {
+
+                animator.SetBool("crouch", true);
+                speed = 1;
+                boxCollider.enabled = false;
+                if (a == true)
+                {
+                    crouchNow = true;
+                    a = false;
+                }
+                b = true;
+
+
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = 3;
+
+                boxCollider.enabled = true;
+                if (b == true)
+                {
+                    notcrouchNow = true;
+                    b = false;
+                }
+                a= true;
+            }
+
+
+        }
+
+
+
         
 
     }

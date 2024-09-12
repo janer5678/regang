@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class gunscript2 : MonoBehaviour
 {
+
+
+
+
+
     //[SerializeField] private GameObject boomarang;
     // Start is called before the first frame update
     public Transform playerTransform;
@@ -16,6 +22,19 @@ public class gunscript2 : MonoBehaviour
     public GameObject Player;
     public static bool right2 = false;
 
+
+
+
+    void Awake()
+    {
+
+
+
+
+
+
+    }
+
     void Start()
     {
         
@@ -27,7 +46,7 @@ public class gunscript2 : MonoBehaviour
     void Update()
     {
         
-
+        
         if (player2.staticGunFliped2 == true)
         {
             if (!right2)
@@ -71,11 +90,33 @@ public class gunscript2 : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Q) && player2.timer2 == 0)
+
+        if (StaticScript.player2character == 4)
         {
-            Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-            player2.timer2 = 120;
+            if (Input.GetKey(KeyCode.Q) && player2.timer2 == 0)
+            {
+                Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+                player2.timer2 = 120;
+            }
         }
+        else if (StaticScript.player1character == 4)
+        {
+            if (Input.GetKey(KeyCode.Slash) && player2.timer2 == 0)
+            {
+                Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+                player2.timer2 = 120;
+            }
+        }
+        else if (StaticScript.player3character == 4)
+        {
+            if (player2.attack1 > 0f && player2.timer2 == 0)
+            {
+                Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+                player2.timer2 = 120;
+            }
+        }
+
+
         if (player2.bigboomerang == true)
         {
             player2.bigboomerang = false;   

@@ -20,7 +20,7 @@ public class Player2Movement1 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (OnCharacter != GameController.Player1char)
+            if (OnCharacter != GameController.Player1char &&  OnCharacter != GameController.Player3char)
             {
                 GameController.Player2char = OnCharacter;
                 Clear = false;

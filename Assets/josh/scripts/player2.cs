@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player2 : MonoBehaviour
 {
@@ -49,6 +50,50 @@ public class player2 : MonoBehaviour
     public GameObject object1;
     private float speed2 = 4f;
     public static GameObject pl2;
+
+    float move;
+    float attack2;
+    float down;
+    float up;
+
+
+    public static float attack1;
+    Josh2Controls controls;
+
+    void Awake()
+    {
+        controls = new Josh2Controls();
+
+        controls.Josh2.Movement.performed += ctx => move = ctx.ReadValue<float>();
+        controls.Josh2.Movement.canceled += ctx => move = 0f;
+
+        controls.Josh2.Attack2.performed += ctx => attack2 = ctx.ReadValue<float>();
+        controls.Josh2.Attack2.canceled += ctx => attack2 = 0f;
+
+        controls.Josh2.Down.performed += ctx => down = ctx.ReadValue<float>();
+        controls.Josh2.Down.canceled += ctx => down = 0f;
+        
+        
+        controls.Josh2.Up.performed += ctx => up = ctx.ReadValue<float>();
+        controls.Josh2.Up.canceled += ctx => up = 0f;
+
+        controls.Josh2.Attack1.performed += ctx => attack1 = ctx.ReadValue<float>();
+        controls.Josh2.Attack1.canceled += ctx => attack1 = 0f;
+
+    }
+
+
+
+
+    void OnEnable()
+    {
+        controls.Josh2.Enable();  // Ensure your action map is enabled
+    }
+
+    void OnDisable()
+    {
+        controls.Josh2.Disable(); // Disable to avoid memory leaks or errors
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -132,9 +177,17 @@ public class player2 : MonoBehaviour
             yield return new WaitForSeconds(0.01f); // Wait for 0.001 seconds
         }
     }
+
+
+
+
     // Update is called once per frame
     void Update()
     {
+        
+
+
+
         if (IsGrounded() == true)
         {
             animator.SetBool("crouch", false);
@@ -149,63 +202,196 @@ public class player2 : MonoBehaviour
         {
             timer2--;
         }
-        if ((Input.GetKeyDown(KeyCode.E)) && timer1 == 0)
+
+        
+        if (StaticScript.player2character == 4)
         {
-            timer1 = 3000;
+                
+            if ((Input.GetKeyDown(KeyCode.Alpha1)) && timer1 == 0)
+            {
+                timer1 = 3000;
 
-            if (ability == 0)
-            {
-                StartCoroutine(ReverseControlsCoroutine());
-            }
-            if (ability == 1)
-            {
-                StartCoroutine(ReverseControlsCoroutine2());
-            }
-            if (ability == 2)
-            {
-                bigboomerang = true;
-                StartCoroutine(bigBoomerang2());
-            }
-            if (ability == 3)
-            {
-                StartCoroutine(GravityReverse());
-            }
-            if (ability == 4)
-            {
-                StartCoroutine(Invisible());
-            }
-            if (ability == 5)
-            {
-                bulletDirection = true;
-                StartCoroutine(bulletDirectionChanger());
+                if (ability == 0)
+                {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+                if (ability == 1)
+                {
+                    StartCoroutine(ReverseControlsCoroutine2());
+                }
+                if (ability == 2)
+                {
+                    bigboomerang = true;
+                    StartCoroutine(bigBoomerang2());
+                }
+                if (ability == 3)
+                {
+                    StartCoroutine(GravityReverse());
+                }
+                if (ability == 4)
+                {
+                    StartCoroutine(Invisible());
+                }
+                if (ability == 5)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
 
-            }
-            if (ability == 6)
-            {
-                StartCoroutine(Invincible());
-            }
-            if (ability == 7)
-            {
-                StartCoroutine(blueRay());
-            }
-            if (ability == abilityCount)
-            {
-                ability = 0;
-                ability = ability + UnityEngine.Random.Range(1, 3) - 1;
+                }
+                if (ability == 6)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 7)
+                {
+                    StartCoroutine(blueRay());
+                }
+                if (ability == abilityCount)
+                {
+                    ability = 0;
+                    ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
-            }
-            else if (ability == (abilityCount - 1))
-            {
-                ability = ability + 1;
+                }
+                else if (ability == (abilityCount - 1))
+                {
+                    ability = ability + 1;
 
-            }
-            else
-            {
-                ability++;
-                //ability = ability + UnityEngine.Random.Range(1, 3);
+                }
+                else
+                {
+                    ability++;
+                    //ability = ability + UnityEngine.Random.Range(1, 3);
 
+                }
             }
         }
+        else if (StaticScript.player1character == 4)
+        {
+            if ((Input.GetKeyDown(KeyCode.Period)) && timer1 == 0)
+            {
+                timer1 = 3000;
+
+                if (ability == 0)
+                {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+                if (ability == 1)
+                {
+                    StartCoroutine(ReverseControlsCoroutine2());
+                }
+                if (ability == 2)
+                {
+                    bigboomerang = true;
+                    StartCoroutine(bigBoomerang2());
+                }
+                if (ability == 3)
+                {
+                    StartCoroutine(GravityReverse());
+                }
+                if (ability == 4)
+                {
+                    StartCoroutine(Invisible());
+                }
+                if (ability == 5)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
+                }
+                if (ability == 6)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 7)
+                {
+                    StartCoroutine(blueRay());
+                }
+                if (ability == abilityCount)
+                {
+                    ability = 0;
+                    ability = ability + UnityEngine.Random.Range(1, 3) - 1;
+
+                }
+                else if (ability == (abilityCount - 1))
+                {
+                    ability = ability + 1;
+
+                }
+                else
+                {
+                    ability++;
+                    //ability = ability + UnityEngine.Random.Range(1, 3);
+
+                }
+            }
+        }
+        else if (StaticScript.player3character == 4)
+        {
+            if (attack2 == 1 && timer1 == 0)
+            {
+                timer1 = 3000;
+
+                if (ability == 0)
+                {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+                if (ability == 1)
+                {
+                    StartCoroutine(ReverseControlsCoroutine2());
+                }
+                if (ability == 2)
+                {
+                    bigboomerang = true;
+                    StartCoroutine(bigBoomerang2());
+                }
+                if (ability == 3)
+                {
+                    StartCoroutine(GravityReverse());
+                }
+                if (ability == 4)
+                {
+                    StartCoroutine(Invisible());
+                }
+                if (ability == 5)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
+                }
+                if (ability == 6)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 7)
+                {
+                    StartCoroutine(blueRay());
+                }
+                if (ability == abilityCount)
+                {
+                    ability = 0;
+                    ability = ability + UnityEngine.Random.Range(1, 3) - 1;
+
+                }
+                else if (ability == (abilityCount - 1))
+                {
+                    ability = ability + 1;
+
+                }
+                else
+                {
+                    ability++;
+                    //ability = ability + UnityEngine.Random.Range(1, 3);
+
+                }
+            }
+        }
+    
+
+
+
+
+
+
         if (kill == true)
         {
             kill = false;
@@ -213,14 +399,45 @@ public class player2 : MonoBehaviour
             jumping2++;
         }
         horizontal = 0f;
-        if (Input.GetKey(KeyCode.A))
+
+        if (StaticScript.player2character == 4)
         {
-            horizontal = reverseControls ? 1f : -1f;
+            if (Input.GetKey(KeyCode.A))
+            {
+                horizontal = reverseControls ? 1f : -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                horizontal = reverseControls ? -1f : 1f;
+            }
+
+
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (StaticScript.player1character == 4)
         {
-            horizontal = reverseControls ? -1f : 1f;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = reverseControls ? 1f : -1f;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = reverseControls ? -1f : 1f;
+            }
         }
+        else if (StaticScript.player3character == 4)
+        {
+            if (move < 0)
+            {
+                horizontal = reverseControls ? 1f : -1f;
+            }
+            else if (move > 0)
+            {
+                horizontal = reverseControls ? -1f : 1f;
+            }
+        }
+
+
+
 
         if (horizontal > 0 && isFlipped2)
         {
@@ -237,61 +454,178 @@ public class player2 : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
 
-        if ((reverseControls2 ? Input.GetKeyDown(KeyCode.S) : Input.GetKeyDown(KeyCode.W)) && IsGrounded())
+        if (StaticScript.player2character == 4)
         {
-            if (gravityReversed == true)
+                
+            if ((reverseControls2 ? Input.GetKeyDown(KeyCode.S) : Input.GetKeyDown(KeyCode.W)) && IsGrounded())
             {
-                animator.SetBool("jumping", true);
-                rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                if (gravityReversed == true)
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+                }
+            }
+            if ((reverseControls2 ? Input.GetKeyDown(KeyCode.S) : Input.GetKeyDown(KeyCode.W)) && !IsGrounded() && jumping2 != 0)
+            {
+                if (gravityReversed == true)
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+                }
+
+            }
+
+            if ((reverseControls2 ? Input.GetKey(KeyCode.W) : Input.GetKey(KeyCode.S)) && IsGrounded())
+            {
+                animator.SetBool("crouch", true);
+                speed = speed2/2;
+                boxCollider.enabled = false;
+                if (a)
+                {
+                    crouchNow2 = true;
+                    a = false;
+                }
+                b = true;
             }
             else
             {
-                animator.SetBool("jumping", true);
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
+                animator.SetBool("crouch", false);
+                speed = speed2;
+                boxCollider.enabled = true;
+                if (b)
+                {
+                    notcrouchNow2 = true;
+                    b = false;
+                }
+                a = true;
             }
         }
-        if ((reverseControls2 ? Input.GetKeyDown(KeyCode.S) : Input.GetKeyDown(KeyCode.W)) && !IsGrounded() && jumping2 != 0)
+        else if (StaticScript.player1character == 4)
         {
-            if (gravityReversed == true)
+            if ((reverseControls2 ? Input.GetKeyDown(KeyCode.DownArrow) : Input.GetKeyDown(KeyCode.UpArrow)) && IsGrounded())
             {
-                jumping2--;
-                rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                if (gravityReversed == true)
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+                }
+            }
+            if ((reverseControls2 ? Input.GetKeyDown(KeyCode.DownArrow) : Input.GetKeyDown(KeyCode.UpArrow)) && !IsGrounded() && jumping2 != 0)
+            {
+                if (gravityReversed == true)
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+                }
+
+            }
+
+            if ((reverseControls2 ? Input.GetKey(KeyCode.UpArrow) : Input.GetKey(KeyCode.DownArrow)) && IsGrounded())
+            {
+                animator.SetBool("crouch", true);
+                speed = speed2/2;
+                boxCollider.enabled = false;
+                if (a)
+                {
+                    crouchNow2 = true;
+                    a = false;
+                }
+                b = true;
             }
             else
             {
-                jumping2--;
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
+                animator.SetBool("crouch", false);
+                speed = speed2;
+                boxCollider.enabled = true;
+                if (b)
+                {
+                    notcrouchNow2 = true;
+                    b = false;
+                }
+                a = true;
             }
-
         }
-
-        if ((reverseControls2 ? Input.GetKey(KeyCode.W) : Input.GetKey(KeyCode.S)) && IsGrounded())
+        else if (StaticScript.player3character == 4)
         {
-            animator.SetBool("crouch", true);
-            speed = speed2/2;
-            boxCollider.enabled = false;
-            if (a)
+            if (reverseControls2 ? down > 0f : up > 0f && IsGrounded())
             {
-                crouchNow2 = true;
-                a = false;
-            }
-            b = true;
-        }
-        else
-        {
-            animator.SetBool("crouch", false);
-            speed = speed2;
-            boxCollider.enabled = true;
-            if (b)
-            {
-                notcrouchNow2 = true;
-                b = false;
-            }
-            a = true;
-        }
+                if (gravityReversed == true)
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    animator.SetBool("jumping", true);
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
+                }
+            }
+            if (reverseControls2 ? down > 0f : up > 0f && !IsGrounded() && jumping2 != 0)
+            {
+                if (gravityReversed == true)
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, -jumpingPower);
+                }
+                else
+                {
+                    jumping2--;
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+                }
+
+            }
+
+            if (reverseControls2 ? up > 0f : down > 0f && IsGrounded())
+            {
+                animator.SetBool("crouch", true);
+                speed = speed2/2;
+                boxCollider.enabled = false;
+                if (a)
+                {
+                    crouchNow2 = true;
+                    a = false;
+                }
+                b = true;
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = speed2;
+                boxCollider.enabled = true;
+                if (b)
+                {
+                    notcrouchNow2 = true;
+                    b = false;
+                }
+                a = true;
+            }
+        }
 
 
     }

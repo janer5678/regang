@@ -1,60 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
-public class Player3Movement2 : MonoBehaviour
+
+public class Player4Controllers : MonoBehaviour
 {
-    //private PlayerInput playerInput;
-
     private int OnCharacter = 1;
-
     private bool Clear = true;
+    PlayerControls1 controls;  // Use Player2Controls
 
-    //private InputDevice player1Device;
-
-    private SpriteRenderer sp;
-
-    PlayerControls controls;
-
-
-    private int playerindex;
+    private InputDevice player2Device;
 
     void Awake()
     {
-        //playerInput = GetComponent<PlayerInput>();
-        sp = GetComponent<SpriteRenderer>();
-
-        controls = new PlayerControls();
+        controls = new PlayerControls1();  
 
 
-        //player1Device = Gamepad.all[0]; // Assign the first connected gamepad to Player 1
+       // player2Device = Gamepad.all[1]; // Assign the first connected gamepad to Player 1
 
-        
-
-
+        print(Gamepad.all.Count);
         controls.Gameplay.Left.performed += ctx => LeftPress(); ;
         controls.Gameplay.Right.performed += ctx => RightPress(); ;
-        controls.Gameplay.Up.performed += ctx => UpPress(); ;
-        controls.Gameplay.Down.performed += ctx => DownPress(); 
-        controls.Gameplay.Y.performed += ctx => YPress(); 
-
+        controls.Gameplay.Up.performed += ctx =>  UpPress(); ;
+        controls.Gameplay.Down.performed += ctx => DownPress(); ;
+      
     }
-
-    private void YPress()
-    {
-        if (OnCharacter != GameController.Player2char && OnCharacter != GameController.Player1char)
-            {
-                GameController.Player3char = OnCharacter;
-                Clear = false;
-                sp.color = new Color(0.1665313f, 1f, 0f, .8f);
-                GameController.yellowSelected = true;
-                StaticScript.player3character = OnCharacter;
-            }
-
-    }
-
 
     private void LeftPress()
     {
@@ -183,6 +154,7 @@ public class Player3Movement2 : MonoBehaviour
     }
 
 
+
     void Update()
     {
 
@@ -244,23 +216,22 @@ public class Player3Movement2 : MonoBehaviour
     }
 
 
+
+
+
+
+
+    
     void OnEnable ()
     {
         controls.Gameplay.Enable();
 
-  
+        
     }
 
     void OnDisable()
     {
         controls.Gameplay.Disable();
     }
-
-
-
-
-
-
-
 
 }
