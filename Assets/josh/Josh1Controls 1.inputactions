@@ -1,32 +1,32 @@
 {
-    "name": "PlayerControls",
+    "name": "Josh1Controls 1",
     "maps": [
         {
-            "name": "Gameplay",
-            "id": "e1193ed0-f290-4844-a2a6-f78815fea899",
+            "name": "Josh2",
+            "id": "ef972eca-79cb-48c1-ae10-62efbddf846a",
             "actions": [
                 {
-                    "name": "Left",
+                    "name": "Movement",
                     "type": "Button",
-                    "id": "e5c73a34-8dd0-40bd-bb56-c5da22e64912",
+                    "id": "84c1e26f-10d0-470f-ba13-745361cee6cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Attack1",
+                    "type": "Button",
+                    "id": "0a7e4026-751f-44b0-a1b4-803b64cbc00e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right",
+                    "name": "Attack2",
                     "type": "Button",
-                    "id": "fa12ef8b-9007-4b9b-b2d7-0619eabb4f3a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Up",
-                    "type": "Button",
-                    "id": "b0db2bb6-5c63-4b0e-849c-34dc60b214a5",
+                    "id": "2533aed9-6fa4-48bc-abf4-afea2fdd7cf5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -35,16 +35,16 @@
                 {
                     "name": "Down",
                     "type": "Button",
-                    "id": "28f3791a-08b8-42f4-b8ed-16d64d9566ae",
+                    "id": "c83afea1-c0c3-4da3-a102-4b47f59b4cfe",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Y",
-                    "type": "Button",
-                    "id": "41628167-a393-4ada-b7c3-6f4cefab0e02",
+                    "name": "Up",
+                    "type": "PassThrough",
+                    "id": "edf9e99d-df30-4620-9310-23ab5152e406",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -53,41 +53,63 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "8c88601e-03a2-4ad1-8196-5f0d270e35f6",
+                    "name": "Move",
+                    "id": "11ea751c-5259-4462-a8ef-4e7d9eea5f28",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9ea44b8b-f3ec-4596-b7e5-09c1ac014510",
                     "path": "<HID::USB gamepad>/stick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "760c139d-c8fd-45ce-81b5-5be504b93d8e",
+                    "name": "positive",
+                    "id": "45ea7017-1f5e-4123-925c-5e869a4d1d02",
                     "path": "<HID::USB gamepad>/stick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "Movement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "6ec4ec64-5f74-4c6d-aba2-f460dd0428f6",
-                    "path": "<HID::USB gamepad>/stick/up",
+                    "id": "999d4f72-1f2b-47ac-bd43-658022bd40bf",
+                    "path": "<HID::USB gamepad>/button4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Up",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c8b73634-4cc2-4a1c-90b9-ad959dc16d63",
+                    "id": "7122477d-1501-41be-bf5f-b1a0b86b4a4e",
+                    "path": "<HID::USB gamepad>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6b7d835-f4cf-4ab1-95b1-0adff97e5d43",
                     "path": "<HID::USB gamepad>/stick/down",
                     "interactions": "",
                     "processors": "",
@@ -98,40 +120,17 @@
                 },
                 {
                     "name": "",
-                    "id": "70764208-ae27-4c27-a80f-79f85c247d35",
-                    "path": "<HID::USB gamepad>/button4",
+                    "id": "4173e81d-1266-46f8-a530-36b38debd9fa",
+                    "path": "<HID::USB gamepad>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Y",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Player1Scheme",
-            "bindingGroup": "Player1Scheme",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Player2Scheme",
-            "bindingGroup": "Player2Scheme",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }

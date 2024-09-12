@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class player3 : MonoBehaviour
@@ -97,39 +94,100 @@ public class player3 : MonoBehaviour
         {
             timer3 = timer3 - 1;
         }
-        if (Input.GetKey(KeyCode.M) && timer1 == 0)
-        {
-            timer1 = 4000;
-            StartCoroutine(ability1());
-        }
-        if (Input.GetKey(KeyCode.K) && timer2 == 0)
-        {
-            timer2 = 4000;
-            StartCoroutine(ability2());
 
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if(StaticScript.player1character == 7)
         {
-            float randomValue = Random.value;
-
-            if (randomValue <= 0.4f)
+            if (Input.GetKey(KeyCode.Slash) && timer1 == 0)
             {
-                shieldmax++;
+                timer1 = 4000;
+                StartCoroutine(ability1());
             }
-            randomValue = Random.value;
-            if (randomValue <= 0.2f)
-            {
-                shieldmax--;
-            }
-            timer3 = 1500;
         }
+        else if(StaticScript.player2character == 7)
+        {
+            if (Input.GetKey(KeyCode.Q) && timer1 == 0)
+            {
+                timer1 = 4000;
+                StartCoroutine(ability1());
+            }
+        }
+
+
+
+        if(StaticScript.player1character == 7)
+        {
+            if (Input.GetKey(KeyCode.Period) && timer2 == 0)
+            {
+                timer2 = 4000;
+                StartCoroutine(ability2());
+
+            }
+        }
+        else if (StaticScript.player2character == 7)
+        {
+            if (Input.GetKey(KeyCode.Alpha1) && timer2 == 0)
+            {
+                timer2 = 4000;
+                StartCoroutine(ability2());
+
+            }
+        }
+
+
+
+
+
+
+        if(StaticScript.player1character == 7)
+        {
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                float randomValue = Random.value;
+
+                if (randomValue <= 0.4f)
+                {
+                    shieldmax++;
+                }
+                randomValue = Random.value;
+                if (randomValue <= 0.2f)
+                {
+                    shieldmax--;
+                }
+                timer3 = 1500;
+            }
+        }
+        else if (StaticScript.player2character == 7)
+        {
+            if (Input.GetKey(KeyCode.S))
+            {
+                float randomValue = Random.value;
+
+                if (randomValue <= 0.4f)
+                {
+                    shieldmax++;
+                }
+                randomValue = Random.value;
+                if (randomValue <= 0.2f)
+                {
+                    shieldmax--;
+                }
+                timer3 = 1500;
+            }
+        }
+
+
+
         if (shieldmax == 0)
         {
             object1.SetActive(false);
         }
         if (shieldmax > 0)
         {
-            object1.SetActive(true);
+            if (object1 != null)
+            {
+                object1.SetActive(true);
+            }
+
         }
 
         horizontal = 0f;
@@ -208,7 +266,7 @@ public class player3 : MonoBehaviour
             timer2 = 0;
             timer1 = 0;
         }
-        if (collision.gameobject == player2.pl2 && player2.invincible == true)
+        if (collision.gameObject == player2.pl2 && player2.invincible == true)
         {
             return;
         }

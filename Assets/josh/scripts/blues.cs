@@ -37,11 +37,11 @@ public class blues : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameobject == player3.pl3 && player3.invincible == true)
+        if (collision.gameObject == player3.pl3 && player3.invincible == true)
         {
             return;
         }
-        if (collision.gameobject == CompareTag("shield") )
+        if (collision.gameObject == CompareTag("shield") )
         {
             return;
         }

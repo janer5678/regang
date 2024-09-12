@@ -77,7 +77,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8c88601e-03a2-4ad1-8196-5f0d270e35f6"",
-                    ""path"": ""<Joystick>/stick/left"",
+                    ""path"": ""<HID::USB gamepad>/stick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -88,7 +88,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""760c139d-c8fd-45ce-81b5-5be504b93d8e"",
-                    ""path"": ""<Joystick>/stick/right"",
+                    ""path"": ""<HID::USB gamepad>/stick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -99,7 +99,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6ec4ec64-5f74-4c6d-aba2-f460dd0428f6"",
-                    ""path"": ""<Joystick>/stick/up"",
+                    ""path"": ""<HID::USB gamepad>/stick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -110,7 +110,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c8b73634-4cc2-4a1c-90b9-ad959dc16d63"",
-                    ""path"": ""<Joystick>/stick/down"",
+                    ""path"": ""<HID::USB gamepad>/stick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
