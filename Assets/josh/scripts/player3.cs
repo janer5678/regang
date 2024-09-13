@@ -204,14 +204,18 @@ public class player3 : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.DownArrow)&&timer3==0)
             {
+                if(invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
 
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
@@ -222,14 +226,17 @@ public class player3 : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.S) && timer3==0)
             {
+                if (invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
-
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
@@ -240,14 +247,18 @@ public class player3 : MonoBehaviour
         {
             if (down > 0 && timer3 == 0)
             {
+                if (invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
 
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
@@ -359,7 +370,6 @@ public class player3 : MonoBehaviour
 
 
         print(shieldmax);
-
     }
    
 

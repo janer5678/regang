@@ -39,7 +39,7 @@ public class player2 : MonoBehaviour
     private bool reverseControls2 = false;
 
     public static bool staticGunFliped2;
-    private const int abilityCount = 7;
+    private const int abilityCount = 8;
     public static bool bulletDirection = false;
     private bool gravityReversed = false;
     private Color originalColor;
@@ -103,7 +103,6 @@ public class player2 : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ability = ability + UnityEngine.Random.Range(1, 4) - 1;
         originalColor = spriteRenderer.color;
-        ability = 2;
 
     }
     void FlipSprite()
@@ -212,40 +211,45 @@ public class player2 : MonoBehaviour
                 
             if ((Input.GetKeyDown(KeyCode.Alpha1)) && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
+                if (ability == 6)
                 {
                     bulletDirection = true;
                     StartCoroutine(bulletDirectionChanger());
 
                 }
-                if (ability == 6)
+                if (ability == 7)
                 {
                     StartCoroutine(Invincible());
                 }
-                if (ability == 7)
+                if (ability == 8)
                 {
                     StartCoroutine(blueRay());
                 }
@@ -262,8 +266,8 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
             }
@@ -272,40 +276,45 @@ public class player2 : MonoBehaviour
         {
             if ((Input.GetKeyDown(KeyCode.Period)) && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
+                if (ability == 6)
                 {
                     bulletDirection = true;
                     StartCoroutine(bulletDirectionChanger());
 
                 }
-                if (ability == 6)
+                if (ability == 7)
                 {
                     StartCoroutine(Invincible());
                 }
-                if (ability == 7)
+                if (ability == 8)
                 {
                     StartCoroutine(blueRay());
                 }
@@ -322,8 +331,8 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
             }
@@ -332,40 +341,45 @@ public class player2 : MonoBehaviour
         {
             if (attack2 == 1 && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
+                if (ability == 6)
                 {
                     bulletDirection = true;
                     StartCoroutine(bulletDirectionChanger());
 
                 }
-                if (ability == 6)
+                if (ability == 7)
                 {
                     StartCoroutine(Invincible());
                 }
-                if (ability == 7)
+                if (ability == 8)
                 {
                     StartCoroutine(blueRay());
                 }
@@ -382,8 +396,8 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
             }
