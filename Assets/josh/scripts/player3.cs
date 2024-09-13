@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player3 : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class player3 : MonoBehaviour
     public float jumpingPower = 4f;
 
     public float radius = 0.2f;
+
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform groundCheck2;
@@ -32,12 +34,54 @@ public class player3 : MonoBehaviour
     public GameObject object1;
     public static GameObject pl3;
 
+    Josh3Controls controls;
+    float move;
+    float up;
+    float attack1;
+    float attack2;
+    float down;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        controls = new Josh3Controls();
+
+        controls.Josh2.Movement.performed += ctx => move = ctx.ReadValue<float>();
+        controls.Josh2.Movement.canceled += ctx => move = 0f;
+
+        controls.Josh2.Up.performed += ctx => up = ctx.ReadValue<float>();
+        controls.Josh2.Up.canceled += ctx => up = 0f;
+
+        controls.Josh2.Attack1.performed += ctx => attack1 = ctx.ReadValue<float>();
+        controls.Josh2.Attack1.canceled += ctx => attack1 = 0f;
+
+        controls.Josh2.Attack2.performed += ctx => attack2 = ctx.ReadValue<float>();
+        controls.Josh2.Attack2.canceled += ctx => attack2 = 0f;
+
+        controls.Josh2.Down.performed += ctx => down = ctx.ReadValue<float>();
+        controls.Josh2.Down.canceled += ctx => down = 0f;
+    }
+
+
+    void OnEnable()
+    {
+        controls.Josh2.Enable();  // Ensure your action map is enabled
+    }
+
+    void OnDisable()
+    {
+        controls.Josh2.Disable(); // Disable to avoid memory leaks or errors
+    }
+
+
+
+
     void Start()
     {
+
         pl3 = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
-       spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2.enabled = false;
 
     }
@@ -78,7 +122,7 @@ public class player3 : MonoBehaviour
         yield return new WaitForSeconds(i);
         invincible = false;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -95,7 +139,7 @@ public class player3 : MonoBehaviour
             timer3 = timer3 - 1;
         }
 
-        if(StaticScript.player1character == 7)
+        if (StaticScript.player1character == 7)
         {
             if (Input.GetKey(KeyCode.Slash) && timer1 == 0)
             {
@@ -103,7 +147,7 @@ public class player3 : MonoBehaviour
                 StartCoroutine(ability1());
             }
         }
-        else if(StaticScript.player2character == 7)
+        else if (StaticScript.player2character == 7)
         {
             if (Input.GetKey(KeyCode.Q) && timer1 == 0)
             {
@@ -111,10 +155,20 @@ public class player3 : MonoBehaviour
                 StartCoroutine(ability1());
             }
         }
+        else if (StaticScript.player3character == 7)
+        {
+
+            if (attack1 > 0 && timer1 == 0)
+            {
+                timer1 = 4000;
+                StartCoroutine(ability1());
+            }
+
+        }
 
 
 
-        if(StaticScript.player1character == 7)
+        if (StaticScript.player1character == 7)
         {
             if (Input.GetKey(KeyCode.Period) && timer2 == 0)
             {
@@ -130,6 +184,14 @@ public class player3 : MonoBehaviour
                 timer2 = 4000;
                 StartCoroutine(ability2());
 
+            }
+        }
+        else if (StaticScript.player3character == 7)
+        {
+            if (attack2 > 0 && timer2 == 0)
+            {
+                timer2 = 4000;
+                StartCoroutine(ability2());
             }
         }
 
@@ -174,6 +236,24 @@ public class player3 : MonoBehaviour
                 timer3 = 1500;
             }
         }
+        else if (StaticScript.player3character == 7)
+        {
+            if (down > 0)
+            {
+                float randomValue = Random.value;
+
+                if (randomValue <= 0.4f)
+                {
+                    shieldmax++;
+                }
+                randomValue = Random.value;
+                if (randomValue <= 0.2f)
+                {
+                    shieldmax--;
+                }
+                timer3 = 1500;
+            }
+        }
 
 
 
@@ -190,15 +270,50 @@ public class player3 : MonoBehaviour
 
         }
 
+
         horizontal = 0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+
+
+        if (StaticScript.player1character == 7)
         {
-            horizontal = -1f;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = 1f;
+            }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (StaticScript.player2character == 7)
         {
-            horizontal = 1f;
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                horizontal = 1f;
+            }
+
         }
+        else if (StaticScript.player3character == 7)
+        {
+            if (move < 0f)
+            {
+                horizontal = -1f;
+            }
+
+            else if (move > 0f)
+            {
+                horizontal = 1f;
+            }
+        }
+
+
+
+
 
         if (horizontal > 0 && isFlipped)
         {
@@ -210,15 +325,34 @@ public class player3 : MonoBehaviour
         }
         
 
-       
-        rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
         
+        rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow)) && IsGrounded())
+        if (StaticScript.player1character == 7)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
+            if ((Input.GetKeyDown(KeyCode.UpArrow)) && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
         }
+
+        else if (StaticScript.player2character == 7)
+        {
+            if ((Input.GetKeyDown(KeyCode.W)) && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+        }
+
+        else if (StaticScript.player3character == 7)
+        {
+            if (up > 0  && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+        }
+
+
         
 
     }
@@ -232,6 +366,7 @@ public class player3 : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);
         RaycastHit2D hit3 = Physics2D.Raycast(groundCheck3.position, Vector2.down, 0.1f, groundlayer);
         UnityEngine.Debug.DrawRay(groundCheck.position, Vector2.down * hit.distance, Color.red);
+        
         if (hit3.collider!=null)
         {
             return true;
@@ -245,6 +380,7 @@ public class player3 : MonoBehaviour
     }
     private IEnumerator jumpReset()
     {
+
         yield return new WaitForSeconds(3);
         jumpingPower = jumpingPower / 1.75f;
 

@@ -259,8 +259,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -392, y: 311}
-  m_SizeDelta: {x: 1038.9675, y: 419.0513}
+  m_AnchoredPosition: {x: 511, y: 209.53}
+  m_SizeDelta: {x: 2428.4097, y: 419.0513}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258083087
 MonoBehaviour:
@@ -284,18 +284,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 141
+    m_FontSize: 149
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 155
+    m_MaxSize: 199
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "game start menu \n"
+  m_Text: Best Subject Arena 2
 --- !u!222 &258083088
 CanvasRenderer:
   m_ObjectHideFlags: 0
