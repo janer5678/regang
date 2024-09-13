@@ -61,13 +61,15 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Movement", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+        if (Input.GetKey(KeyCode.UpArrow) && isGrounded)
         {
-            animator.SetBool("Jumping", true);
+            animator.SetBool("IsGrounded", false);
+            animator.SetBool("PreJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jump_force);
-        } else
+        } else if (isGrounded)
         {
-            animator.SetBool("Jumping", true);
+            animator.SetBool("IsGrounded", true);
+            animator.SetBool("PreJumping", false);
         }
 
     }

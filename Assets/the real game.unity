@@ -940,7 +940,7 @@ MonoBehaviour:
   groundCheckMiddle: {fileID: 473961825}
   groundCheckLeft: {fileID: 1840731164}
   groundCheckRight: {fileID: 1426640912}
-  isGrounded: 0
+  isGrounded: 1
   animator: {fileID: 289969694}
 --- !u!95 &289969694
 Animator:
