@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 75156094}
   - component: {fileID: 75156093}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: player_darius
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,6 +253,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3761390227780871431, guid: 6b8805e38118cde4abf840d8bf983704, type: 3}
+  b1: {fileID: 3761390227780871431, guid: 5eecedb861f33504cbb3c25caa770444, type: 3}
+  b2: {fileID: 3761390227780871431, guid: 9a2344cd16eb0204b8fe9446cba97aa3, type: 3}
+  b3: {fileID: 3761390227780871431, guid: 8783af53ec3b5974cb61de49aa981d17, type: 3}
+  b4: {fileID: 3761390227780871431, guid: e2e3474641650bd4dbdd2191e899504a, type: 3}
+  b5: {fileID: 3761390227780871431, guid: d02bf9bc31ed06247b0e6250eef84328, type: 3}
+  b6: {fileID: 3761390227780871431, guid: 61ce8a523a0890a4fb94b91bdeb71829, type: 3}
+  b7: {fileID: 3761390227780871431, guid: a312784647886b64d9a9b4f12548e13f, type: 3}
+  b8: {fileID: 3761390227780871431, guid: 83d0c5e7f9739ba4fa04a6d74aaa2eb1, type: 3}
 --- !u!60 &75156097
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1042,6 +1050,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 720201564}
   groundCheck2: {fileID: 1543786204}
+  groundCheck3: {fileID: 0}
   animator: {fileID: 365628968}
   boxCollider: {fileID: 365628970}
   boxCollider2: {fileID: 365628967}
@@ -1226,7 +1235,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 0}
+  m_BackGroundColor: {r: 0.5707547, g: 0.8937432, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

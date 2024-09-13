@@ -58,12 +58,24 @@ public class bombs : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject == player3.pl3 && player3.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameObject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameObject == CompareTag("shield"))
+        {
+            return;
+        }
         if (hi == 0)
         {
             StartCoroutine(explode());
             hi = 1;
         }
-        if (!collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("wall"))
+        if (!collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("wall") &&collision.gameObject != player.pl)
         {
             Destroy(collision.gameObject);
         }

@@ -46,6 +46,9 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, groundLayer);
 
 

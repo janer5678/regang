@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player : MonoBehaviour
 {
@@ -30,14 +31,48 @@ public class player : MonoBehaviour
     public static int timer2 = 0;
     public static GameObject pl;
 
+    Josh1Controls1 controls;
+    float move;
+    float up;
+    float down;
+
+    void Awake()
+    {
+        controls = new Josh1Controls1();
+        controls.Josh2.Movement.performed += ctx => move = ctx.ReadValue<float>();
+        controls.Josh2.Movement.canceled += ctx => move = 0f;
+
+        controls.Josh2.Up.performed += ctx => up = ctx.ReadValue<float>();
+        controls.Josh2.Up.canceled += ctx => up = 0f;
+
+        controls.Josh2.Down.performed += ctx => down = ctx.ReadValue<float>();
+        controls.Josh2.Down.canceled += ctx => down = 0f;
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+
+
         pl = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
-       spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
+
+
+    
+    void OnEnable()
+    {
+        controls.Josh2.Enable();  // Ensure your action map is enabled
+    }
+
+    void OnDisable()
+    {
+        controls.Josh2.Disable(); // Disable to avoid memory leaks or errors
+    }
+
     void FlipSprite()
     {
         // Flip the sprite horizontally
@@ -49,6 +84,10 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+        
         if (timer1 != 0)
         {
             timer1--;
@@ -58,14 +97,42 @@ public class player : MonoBehaviour
             timer2--;
         }
         horizontal = 0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+
+        if (StaticScript.player1character == 1)
         {
-            horizontal = -1f;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontal = 1f;
+            }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (StaticScript.player2character == 1)
         {
-            horizontal = 1f;
+            if (Input.GetKey(KeyCode.A))
+            {
+                horizontal = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                horizontal = 1f;
+            }
         }
+        else if (StaticScript.player3character == 1)
+        {
+            if (move < 0)
+            {
+                horizontal = -1f;
+            }
+            else if (move > 0)
+            {
+                horizontal = 1f;
+            }
+        }
+
+
 
         if (horizontal > 0 && isFlipped)
         {
@@ -82,43 +149,135 @@ public class player : MonoBehaviour
         rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 
 
-        if ((Input.GetKey(KeyCode.UpArrow)) && IsGrounded())
+        if (StaticScript.player1character == 1)
         {
-            animator.SetBool("jumping", true);
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
-        }
-
-
-
-        if (Input.GetKey(KeyCode.DownArrow) && IsGrounded())
-        {
-
-            animator.SetBool("crouch", true);
-            speed = 1;
-            boxCollider.enabled = false;
-            if (a == true)
+            if ((Input.GetKey(KeyCode.UpArrow)) && IsGrounded())
             {
-                crouchNow = true;
-                a = false;
+                animator.SetBool("jumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
             }
-            b = true;
-
-
         }
-        else
+        else if (StaticScript.player2character == 1)
         {
-            animator.SetBool("crouch", false);
-            speed = 3;
-
-            boxCollider.enabled = true;
-            if (b == true)
+            if ((Input.GetKey(KeyCode.W)) && IsGrounded())
             {
-                notcrouchNow = true;
-                b = false;
+                animator.SetBool("jumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
             }
-            a= true;
         }
+        else if (StaticScript.player3character == 1)
+        {
+            if (up > 0 && IsGrounded())
+            {
+                animator.SetBool("jumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+            }
+        }
+
+        
+
+        if (StaticScript.player1character == 1)
+        {
+            if (Input.GetKey(KeyCode.DownArrow) && IsGrounded())
+            {
+
+                animator.SetBool("crouch", true);
+                speed = 1;
+                boxCollider.enabled = false;
+                if (a == true)
+                {
+                    crouchNow = true;
+                    a = false;
+                }
+                b = true;
+
+
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = 3;
+
+                boxCollider.enabled = true;
+                if (b == true)
+                {
+                    notcrouchNow = true;
+                    b = false;
+                }
+                a= true;
+            }
+        }
+        else if (StaticScript.player2character == 1)
+        {
+            if (Input.GetKey(KeyCode.S) && IsGrounded())
+            {
+
+                animator.SetBool("crouch", true);
+                speed = 1;
+                boxCollider.enabled = false;
+                if (a == true)
+                {
+                    crouchNow = true;
+                    a = false;
+                }
+                b = true;
+
+
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = 3;
+
+                boxCollider.enabled = true;
+                if (b == true)
+                {
+                    notcrouchNow = true;
+                    b = false;
+                }
+                a= true;
+            }
+
+
+        }
+        else if (StaticScript.player3character == 1)
+        {
+            if (down > 0 && IsGrounded())
+            {
+                
+                animator.SetBool("crouch", true);
+                speed = 1;
+                boxCollider.enabled = false;
+                if (a == true)
+                {
+                    crouchNow = true;
+                    a = false;
+                }
+                b = true;
+
+
+            }
+            else
+            {
+                animator.SetBool("crouch", false);
+                speed = 3;
+
+                boxCollider.enabled = true;
+                if (b == true)
+                {
+                    notcrouchNow = true;
+                    b = false;
+                }
+                a= true;
+            }
+
+
+        }
+
+
         
 
     }
