@@ -222,7 +222,7 @@ public class player2 : MonoBehaviour
                     StartCoroutine(ReverseControlsCoroutine());
                 }
 
-                if (ability == 2
+                if (ability == 2)
                 {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
@@ -231,7 +231,7 @@ public class player2 : MonoBehaviour
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 4
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
@@ -287,7 +287,7 @@ public class player2 : MonoBehaviour
                     StartCoroutine(ReverseControlsCoroutine());
                 }
 
-                if (ability == 2
+                if (ability == 2)
                 {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
@@ -296,7 +296,7 @@ public class player2 : MonoBehaviour
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 4
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
@@ -352,7 +352,7 @@ public class player2 : MonoBehaviour
                     StartCoroutine(ReverseControlsCoroutine());
                 }
 
-                if (ability == 2
+                if (ability == 2)
                 {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
@@ -361,7 +361,7 @@ public class player2 : MonoBehaviour
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 4
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
