@@ -41,7 +41,20 @@ public class blues : MonoBehaviour
         {
             return;
         }
-        if (collision.gameObject == CompareTag("shield") )
+        if (collision.gameObject == CompareTag("shield"))
+        {
+            return;
+        }
+        if (collision.gameObject == CompareTag("shield2"))
+        {
+            if (player3.invincible == false)
+            {
+                player3.shield--;
+                return;
+            }
+            return;
+        }
+        if (collision.gameObject == player2.pl2 && player2.invincible == true)
         {
             return;
         }

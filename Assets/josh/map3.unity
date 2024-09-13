@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 150733883}
   m_Layer: 0
   m_Name: player3shield
-  m_TagString: shield
+  m_TagString: shield2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

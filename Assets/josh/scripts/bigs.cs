@@ -57,6 +57,19 @@ public class bigs : MonoBehaviour
         {
             return;
         }
+        if (collision.gameObject == CompareTag("shield2"))
+        {
+            if (player3.invincible == false)
+            {
+                player3.shield--;
+                return;
+            }
+            return;
+        }
+        if (collision.gameObject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
         if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player2.pl2 && !collision.gameObject.CompareTag("bigboomerang"))
         {
             Destroy(collision.gameObject);

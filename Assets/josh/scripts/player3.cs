@@ -202,7 +202,7 @@ public class player3 : MonoBehaviour
 
         if(StaticScript.player1character == 7)
         {
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow)&&timer3==0)
             {
                 float randomValue = Random.value;
 
@@ -220,7 +220,7 @@ public class player3 : MonoBehaviour
         }
         else if (StaticScript.player2character == 7)
         {
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) && timer3==0)
             {
                 float randomValue = Random.value;
 
@@ -238,7 +238,7 @@ public class player3 : MonoBehaviour
         }
         else if (StaticScript.player3character == 7)
         {
-            if (down > 0)
+            if (down > 0 && timer3 == 0)
             {
                 float randomValue = Random.value;
 
@@ -252,6 +252,7 @@ public class player3 : MonoBehaviour
                     shieldmax--;
                 }
                 timer3 = 1500;
+                randomValue = 1;
             }
         }
 
@@ -268,6 +269,10 @@ public class player3 : MonoBehaviour
                 object1.SetActive(true);
             }
 
+        }
+        if (shieldmax < 0)
+        {
+            shieldmax = 0;
         }
 
 
@@ -353,7 +358,7 @@ public class player3 : MonoBehaviour
         }
 
 
-        
+        print(shieldmax);
 
     }
    
@@ -403,6 +408,14 @@ public class player3 : MonoBehaviour
             timer1 = 0;
         }
         if (collision.gameObject == player2.pl2 && player2.invincible == true)
+        {
+            return;
+        }
+        if (collision.gameObject == CompareTag("shield"))
+        {
+            return;
+        }
+        if (collision.gameObject == CompareTag("shield2"))
         {
             return;
         }

@@ -32,6 +32,8 @@ TagManager:
   - b6
   - b7
   - b8
+  - shield2
+  - bomb
   layers:
   - Default
   - TransparentFX
