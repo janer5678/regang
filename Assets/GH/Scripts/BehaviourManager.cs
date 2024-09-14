@@ -7,9 +7,11 @@ namespace GH.Scripts
         [SerializeField] private GameObject[] playerStates;
         [SerializeField] public KeyCode abilityKey1;
         [SerializeField] public KeyCode abilityKey2;
+        [SerializeField] private GameObject bombPrefab;
         private int _currentStateIndex;
 
-        public Vector2 position;
+        public Vector2 Position;
+        public GameObject BombPrefab => bombPrefab;
 
         private void Start()
         {
@@ -20,7 +22,7 @@ namespace GH.Scripts
             }
         }
 
-        public void SwitchPlayerMode()
+        public void SwitchPlayerMode(Vector2 newPosition)
         {
             var nextIndex = (_currentStateIndex + 1) % playerStates.Length;
 
@@ -28,6 +30,8 @@ namespace GH.Scripts
             playerStates[nextIndex].SetActive(true);
 
             _currentStateIndex = nextIndex;
+
+            playerStates[nextIndex].gameObject.transform.position = newPosition;
         }
 
         public void SetInvincible(bool invincible)

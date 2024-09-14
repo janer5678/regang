@@ -30,23 +30,7 @@ namespace GH.Scripts
             };
         }
 
-        protected void OnEnable()
-        {
-            if (BehaviourManager is not null)
-            {
-                transform.position = BehaviourManager.position;
-            }
-        }
-
-        protected void OnDisable()
-        {
-            if (BehaviourManager is not null)
-            {
-                BehaviourManager.position = new Vector2(transform.position.x, transform.position.y);
-            }
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
+        protected void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("player"))
             {

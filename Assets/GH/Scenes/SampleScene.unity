@@ -174,7 +174,7 @@ MonoBehaviour:
   - {fileID: 1393721726}
   abilityKey1: 122
   abilityKey2: 120
-  position: {x: 0, y: 0}
+  bombPrefab: {fileID: 2369216018333964077, guid: 7d8d1242d1c877042bba981d6b5a607d, type: 3}
 --- !u!1 &221783216
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 221783216}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 986e4aa5af24f644cb87ac2ffd86658f, type: 2}
+  m_Material: {fileID: 6200000, guid: 26826a1d3a440ea4595d4b0884b781bb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -332,7 +332,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 305400529}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 986e4aa5af24f644cb87ac2ffd86658f, type: 2}
+  m_Material: {fileID: 6200000, guid: 26826a1d3a440ea4595d4b0884b781bb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -462,7 +462,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 330963766}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 986e4aa5af24f644cb87ac2ffd86658f, type: 2}
+  m_Material: {fileID: 6200000, guid: 26826a1d3a440ea4595d4b0884b781bb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 1066954207}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1102,17 +1102,17 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0.41568628}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0.01764706, b: 0.01764706, a: 0.41568628}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 1157
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -1128,7 +1128,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 1393721731}
   m_Layer: 0
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1528,7 +1528,7 @@ Transform:
   m_GameObject: {fileID: 1856990338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.76, y: -3.44, z: 0}
+  m_LocalPosition: {x: 7.01, y: -3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

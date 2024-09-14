@@ -1,5 +1,4 @@
 using System.Collections;
-using System.ComponentModel;
 using GH.Scripts.Timers;
 using UnityEngine;
 
@@ -126,10 +125,11 @@ namespace GH.Scripts.Cube
             // turn into ship
             if (Input.GetKey(BehaviourManager.abilityKey2) && _canTurnIntoShip)
             {
+                _canDash = true;
                 _canTurnIntoShip = false;
                 _shipAbilityTimer.StartTimer();
 
-                BehaviourManager.SwitchPlayerMode();
+                BehaviourManager.SwitchPlayerMode(gameObject.transform.position);
             }
         }
     }

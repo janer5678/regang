@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GH.Scripts.Timers;
 using UnityEngine;
 
@@ -11,13 +12,25 @@ namespace GH.Scripts.Ship
         [SerializeField] private float backToCubeTimeoutSecs;
 
         private Timer _backToCubeTimer;
+        private Vector2 _originalScale;
+
+        private bool _canShrink = true;
+        private bool _canDropBomb = true;
 
         private new void Start()
         {
             base.Start();
 
             _backToCubeTimer = gameObject.AddComponent<Timer>();
-            _backToCubeTimer.Init(backToCubeTimeoutSecs, BehaviourManager.SwitchPlayerMode);
+            _backToCubeTimer.Init(backToCubeTimeoutSecs, 
+                () => {
+                    _canShrink = true;
+                    _canDropBomb = true;
+                    transform.localScale = _originalScale;
+                    BehaviourManager.SwitchPlayerMode(gameObject.transform.position);
+                });
+
+            _originalScale = transform.localScale;
         }
 
         private void FixedUpdate()
@@ -33,6 +46,8 @@ namespace GH.Scripts.Ship
             RigidBody.MoveRotation(Quaternion.LookRotation(RigidBody.velocity));
 
             // auto fire missiles if possible
+
+            Abilities();
         }
 
         public void Move()
@@ -52,16 +67,39 @@ namespace GH.Scripts.Ship
 
         public void Abilities()
         {
-            if (Input.GetKey(BehaviourManager.abilityKey1))
+            if (Input.GetKey(BehaviourManager.abilityKey1) && _canShrink)
             {
                 // shrink own hitbox size
-                transform.localScale /= 2;
+                StartCoroutine(Shrink());
             }
 
-            if (Input.GetKey(BehaviourManager.abilityKey2))
+            if (Input.GetKey(BehaviourManager.abilityKey2) && _canDropBomb)
             {
                 // drop bomb
+                StartCoroutine(DropBomb());
             }
+        }
+
+        private IEnumerator Shrink()
+        {
+            transform.localScale /= 2;
+            _canShrink = false;
+
+            yield return new WaitForSeconds(1);
+
+            transform.localScale = _originalScale;
+            _canShrink = true;
+        }
+
+        private IEnumerator DropBomb()
+        {
+            gameObject.tag = "wall";
+            _canDropBomb = false;
+            Instantiate(BehaviourManager.BombPrefab, transform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(1);
+            gameObject.tag = "player";
+            _canDropBomb = true;
         }
     }
 }
