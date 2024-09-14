@@ -11,9 +11,11 @@ public class player2 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 4f;
-    private float speed2 = 4f;
-    public float jumpingPower = 4f;
+    public float speed = 0f;
+    private float speed2 = 0f;
+    public float speedy = 6f;
+    public float jumpingPower = 0f;
+    public float jumpy = 6f;
     public static bool kill = false;
     private float jumping = 0f;
     private float jumping2 = 0f;
@@ -103,6 +105,9 @@ public class player2 : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ability = ability + UnityEngine.Random.Range(1, 4) - 1;
         originalColor = spriteRenderer.color;
+        speed = speedy;
+        speed2 = speedy;
+        jumpingPower = jumpy;
 
     }
     void FlipSprite()
