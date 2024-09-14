@@ -1,26 +1,41 @@
 using System;
+using GH.Scripts.Timers;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
 
 namespace GH.Scripts.Ship
 {
-    public class Movement : Player
+    public class Movement : Player, IPlayer
     {
         [SerializeField] private float xDeceleration;
         [SerializeField] private float yMaxVelocity;
+        [SerializeField] private float backToCubeTimeoutSecs;
 
-        private void Update()
+        private Timer _backToCubeTimer;
+
+        private new void Start()
         {
-            Move();
+            base.Start();
+
+            _backToCubeTimer = gameObject.AddComponent<Timer>();
+            _backToCubeTimer.Init(backToCubeTimeoutSecs, BehaviourManager.SwitchPlayerMode);
         }
 
         private void FixedUpdate()
         {
+            if (!_backToCubeTimer.IsRunning)
+            {
+                _backToCubeTimer.ResetTimer();
+                _backToCubeTimer.StartTimer();
+            }
+
+            Move();
+
             RigidBody.MoveRotation(Quaternion.LookRotation(RigidBody.velocity));
+
+            // auto fire missiles if possible
         }
 
-        protected override void Move()
+        public void Move()
         {
             RigidBody.velocity = new Vector2(RigidBody.velocity.x * xDeceleration, RigidBody.velocity.y);
 
@@ -35,17 +50,18 @@ namespace GH.Scripts.Ship
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void Abilities()
         {
-            if (other.gameObject.CompareTag("player"))
+            if (Input.GetKey(BehaviourManager.abilityKey1))
             {
-                Destroy(other.gameObject);
+                // shrink own hitbox size
+                transform.localScale /= 2;
+            }
+
+            if (Input.GetKey(BehaviourManager.abilityKey2))
+            {
+                // drop bomb
             }
         }
     }
 }
-
-// auto fire missiles
-
-// shrink hitbox but missiles size remains same
-// drop bomb

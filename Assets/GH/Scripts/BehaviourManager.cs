@@ -5,6 +5,8 @@ namespace GH.Scripts
     public class BehaviourManager : MonoBehaviour
     {
         [SerializeField] private GameObject[] playerStates;
+        [SerializeField] public KeyCode abilityKey1;
+        [SerializeField] public KeyCode abilityKey2;
         private int _currentStateIndex;
 
         public Vector2 position;
@@ -18,17 +20,14 @@ namespace GH.Scripts
             }
         }
 
-        private void Update()
+        public void SwitchPlayerMode()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                var nextIndex = (_currentStateIndex + 1) % playerStates.Length;
+            var nextIndex = (_currentStateIndex + 1) % playerStates.Length;
 
-                playerStates[_currentStateIndex].SetActive(false);
-                playerStates[nextIndex].SetActive(true);
+            playerStates[_currentStateIndex].SetActive(false);
+            playerStates[nextIndex].SetActive(true);
 
-                _currentStateIndex = nextIndex;
-            }
+            _currentStateIndex = nextIndex;
         }
     }
 }
