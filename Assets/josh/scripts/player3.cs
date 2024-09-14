@@ -6,9 +6,11 @@ public class player3 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 2f;
-    public float jumpingPower = 4f;
-
+    public float speed = 0f;
+    public float jumpingPower = 0f;
+    public float speedy = 3f;
+    public float jumpy = 6f;
+    public static int hi = 0;
     public float radius = 0.2f;
 
     [SerializeField] private LayerMask groundlayer;
@@ -33,7 +35,6 @@ public class player3 : MonoBehaviour
     public static bool invincible = false;
     public GameObject object1;
     public static GameObject pl3;
-    public static int foo = 0;
 
     Josh3Controls controls;
     float move;
@@ -84,6 +85,8 @@ public class player3 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2.enabled = false;
+        speed = speedy;
+        jumpingPower = jumpy;
 
     }
     void FlipSprite()
@@ -385,6 +388,12 @@ public class player3 : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
         }
+        if (hi == 1)
+        {
+            jumpingPower = jumpingPower * 1.75f;
+            StartCoroutine(jumpReset());
+            hi = 0;
+        }
 
     }
 
@@ -430,6 +439,7 @@ public class player3 : MonoBehaviour
         {
             Destroy(collision.gameObject);
             orbspawner.a = true;
+            timer3 = 0;
             timer2 = 0;
             timer1 = 0;
         }

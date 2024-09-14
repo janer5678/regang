@@ -47,10 +47,18 @@ public class player3shield : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("jumpboostorb"))
         {
+            Destroy(collision.gameObject);
+            powerupjump.a = true;
+            player3.hi = 1;
             return;
         }
         if (collision.gameObject.CompareTag("orb2"))
         {
+            Destroy(collision.gameObject);
+            orbspawner.a = true;
+            player3.timer3 = 0;
+            player3.timer2 = 0;
+            player3.timer1 = 0;
             return;
         }
 

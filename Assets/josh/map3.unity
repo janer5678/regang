@@ -300,7 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  speedy: 6
   jumpingPower: 4
+  jumpy: 6
   radius: 0.2
   groundlayer:
     serializedVersion: 2
@@ -573,7 +575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  speedy: 6
   jumpingPower: 6
+  jumpy: 6
   radius: 0.2
   groundlayer:
     serializedVersion: 2
@@ -2823,6 +2827,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   jumpingPower: 6
+  speedy: 3
+  jumpy: 6
   radius: 0.2
   groundlayer:
     serializedVersion: 2
