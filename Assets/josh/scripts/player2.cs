@@ -12,6 +12,7 @@ public class player2 : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontal;
     public float speed = 4f;
+    private float speed2 = 4f;
     public float jumpingPower = 4f;
     public static bool kill = false;
     private float jumping = 0f;
@@ -48,7 +49,6 @@ public class player2 : MonoBehaviour
     public static float timer2 = 0;
     public static bool blocking2 = false;
     public GameObject object1;
-    private float speed2 = 4f;
     public static GameObject pl2;
 
     float move;
@@ -198,14 +198,20 @@ public class player2 : MonoBehaviour
         }
         if (timer1 != 0 )
         {
-            timer1 = timer1 - 4;
+            timer1 = timer1 - 400 * Time.deltaTime;
         }
         if (timer2 != 0)
         {
-            timer2--;
+            timer2 = timer2 - 400 * Time.deltaTime;
         }
-
-        
+        if (timer2 < 0)
+        {
+            timer2 = 0;
+        }
+        if (timer1 < 0)
+        {
+            timer1 = 0;
+        }
         if (StaticScript.player2character == 4)
         {
                 
@@ -659,20 +665,21 @@ public class player2 : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (gravityReversed == true)
-        {
-            RaycastHit2D hits = Physics2D.Raycast(ceilingCheck.position, Vector2.up, 0.1f, groundlayer);
-            bool isTouchingCeiling = false;
-            if (hits.collider != null)
-            {
-                isTouchingCeiling = true;
-            }
-            else
-            {
-                isTouchingCeiling = false;
-            }
-            return isTouchingCeiling;
-        }
+        //if (gravityReversed == true)
+        //{
+        //    RaycastHit2D hits = Physics2D.Raycast(ceilingCheck.position, Vector2.up, 0.1f, groundlayer);
+        //    bool isTouchingCeiling = false;
+        //    if (hits.collider != null)
+        //    {
+        //        isTouchingCeiling = true;
+        //    }
+        //    else
+        //    {
+        //        isTouchingCeiling = false;
+        //    }
+        //    return isTouchingCeiling;
+        //}
+
         //return Physics2D.OverlapCircle(groundCheck.position, radius, groundlayer);
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundlayer);
         RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);

@@ -96,7 +96,7 @@ public class gunscript2 : MonoBehaviour
             if (Input.GetKey(KeyCode.Q) && player2.timer2 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player2.timer2 = 120 / 5;
+                player2.timer2 = 120 / 2;
             }
         }
         else if (StaticScript.player1character == 4)
@@ -104,7 +104,7 @@ public class gunscript2 : MonoBehaviour
             if (Input.GetKey(KeyCode.Slash) && player2.timer2 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player2.timer2 = 120 / 5;
+                player2.timer2 = 120 / 2;
             }
         }
         else if (StaticScript.player3character == 4)
@@ -112,7 +112,7 @@ public class gunscript2 : MonoBehaviour
             if (player2.attack1 > 0f && player2.timer2 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player2.timer2 = 120 / 5;
+                player2.timer2 = 120 / 2;
             }
         }
 

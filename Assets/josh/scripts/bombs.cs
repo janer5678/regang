@@ -40,9 +40,9 @@ public class bombs : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            
-            //bomb.localScale += new Vector3(0.003f, 0.003f, 0.003f);
-            //boxCollider.size = new Vector2(boxCollider.size.x + 0.003f, boxCollider.size.y + 0.003f);
+
+            bomb.localScale += new Vector3(0.003f, 0.003f, 0.003f);
+            boxCollider.size = new Vector2(boxCollider.size.x + 0.003f, boxCollider.size.y + 0.003f);
             rb.velocity = new Vector2(0f, 0f);
             rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -60,17 +60,20 @@ public class bombs : MonoBehaviour
     {
         if (collision.gameObject == player3.pl3 && player3.invincible == true)
         {
+            Destroy(gameObject);
             return;
         }
-        if (collision.gameObject == CompareTag("shield"))
+        if (collision.gameObject.CompareTag("shield"))
         {
+            Destroy(gameObject);
             return;
         }
-        if (collision.gameObject == CompareTag("shield2"))
+        if (collision.gameObject.CompareTag("shield2"))
         {
             if (player3.invincible == false)
             {
                 player3.shield--;
+                Destroy(gameObject);
                 return;
             }
             return;
@@ -79,7 +82,13 @@ public class bombs : MonoBehaviour
         {
             return;
         }
+
+
         if (collision.gameObject.CompareTag("bomb"))
+        {
+            return;
+        }
+        if (collision.gameObject == player.pl)
         {
             return;
         }

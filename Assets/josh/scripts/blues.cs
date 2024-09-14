@@ -39,17 +39,20 @@ public class blues : MonoBehaviour
     {
         if (collision.gameObject == player3.pl3 && player3.invincible == true)
         {
+            Destroy(gameObject);
             return;
         }
-        if (collision.gameObject == CompareTag("shield"))
+        if (collision.gameObject.CompareTag("shield"))
         {
+            Destroy(gameObject);
             return;
         }
-        if (collision.gameObject == CompareTag("shield2"))
+        if (collision.gameObject.CompareTag("shield2"))
         {
             if (player3.invincible == false)
             {
                 player3.shield--;
+                Destroy(gameObject);
                 return;
             }
             return;
@@ -58,6 +61,8 @@ public class blues : MonoBehaviour
         {
             return;
         }
+
+
         if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("bigboomerang") && collision.gameObject != player2.pl2 && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);

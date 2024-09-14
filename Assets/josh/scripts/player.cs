@@ -7,8 +7,8 @@ public class player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 4f;
-    public float jumpingPower = 4f;
+    public float speed = 9f;
+    public float jumpingPower = 9f;
 
 
     public float radius = 0.2f;
@@ -27,8 +27,8 @@ public class player : MonoBehaviour
     private bool isFlipped = true;
 
     public static bool staticGunFliped;
-    public static int timer1 = 0;
-    public static int timer2 = 0;
+    public static float timer1 = 0;
+    public static float timer2 = 0;
     public static GameObject pl;
 
     Josh1Controls1 controls;
@@ -87,14 +87,22 @@ public class player : MonoBehaviour
 
 
 
-        
+
         if (timer1 != 0)
         {
-            timer1--;
+            timer1 = timer1 - (1 * Time.deltaTime);
         }
         if (timer2 != 0)
         {
-            timer2--;
+            timer2 = timer2 - (1 * Time.deltaTime);
+        }
+        if (timer2 < 0)
+        {
+            timer2 = 0;
+        }
+        if (timer1 < 0)
+        {
+            timer1 = 0;
         }
         horizontal = 0f;
 

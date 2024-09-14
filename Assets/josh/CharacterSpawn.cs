@@ -56,7 +56,6 @@ public class CharacterSpawn : MonoBehaviour
 
 
         Players[StaticScript.player1character - 1].transform.position = Player1Spawn;
-
         Players[StaticScript.player2character - 1].transform.position = Player2Spawn;
         Players[StaticScript.player3character - 1].transform.position = Player3Spawn;
     }

@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BIG GAME/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/UI STUFF/Scenes/PlayerSelection.unity
     guid: 8c226686e04ec224a9c135a8a4d82925
+  - enabled: 1
+    path: Assets/BIG GAME/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/UI STUFF/Scenes/Map Selection.unity
     guid: e2dfc5f833b46464aadea4dde19e2b40
