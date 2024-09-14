@@ -980,6 +980,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 75156092}
   - {fileID: 1075534108}
+  _animator: {fileID: 289969694}
 --- !u!1 &330321983
 GameObject:
   m_ObjectHideFlags: 0

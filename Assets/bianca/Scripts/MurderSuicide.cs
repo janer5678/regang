@@ -1,17 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class MurderSuicide : MonoBehaviour
 {
     [SerializeField] private GameObject Player4;
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private Animator _animator;
+
+    float timer = 1f;
+    bool killwhenready;
+
+    private void Start()
+    {
+        _animator.SetBool("MurderS", false);
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.Slash))
         {
-            MurderSuicideFunc();
+            _animator.SetBool("MurderS", true);
+
+
+            killwhenready = true;
+
         }
+
+        if (killwhenready == true)
+        {
+            timer = timer - Time.deltaTime;
+
+            if (timer < 0f)
+            {
+                MurderSuicideFunc();
+            }
+
+
+        }
+
+
+
+    }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(5);
     }
 
     void MurderSuicideFunc()
@@ -20,7 +55,13 @@ public class MurderSuicide : MonoBehaviour
 
         GameObject closestEnemy = FindClosestEnemy(enemies);
 
-        if (closestEnemy != null) { Destroy(closestEnemy); Destroy(Player4); }
+        if (closestEnemy != null) 
+        {
+            
+            StartCoroutine(Timer());
+            Destroy(closestEnemy);
+            Destroy(Player4);
+        }
     }
 
     GameObject FindClosestEnemy(GameObject[] enemies)
