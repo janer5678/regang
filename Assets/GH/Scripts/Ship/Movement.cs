@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using GH.Scripts.Bomb;
 using GH.Scripts.Timers;
 using UnityEngine;
 
@@ -13,6 +15,7 @@ namespace GH.Scripts.Ship
 
         private Timer _backToCubeTimer;
         private Vector2 _originalScale;
+        private HashSet<GameObject> invisibleBombs = new();
 
         private bool _canShrink = true;
         private bool _canDropBomb = true;
@@ -78,6 +81,16 @@ namespace GH.Scripts.Ship
                 // drop bomb
                 StartCoroutine(DropBomb());
             }
+
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                foreach (var item in invisibleBombs)
+                {
+                    StartCoroutine(item.GetComponent<BaseBomb>().Explode());
+                }
+
+                invisibleBombs.Clear();
+            }
         }
 
         private IEnumerator Shrink()
@@ -96,6 +109,8 @@ namespace GH.Scripts.Ship
             gameObject.tag = "wall";
             _canDropBomb = false;
             Instantiate(BehaviourManager.BombPrefab, transform.position, Quaternion.identity);
+            var invisibleBomb = Instantiate(BehaviourManager.InvisibleBombPrefab, transform.position, Quaternion.identity);
+            invisibleBombs.Add(invisibleBomb);
 
             yield return new WaitForSeconds(1);
             gameObject.tag = "player";

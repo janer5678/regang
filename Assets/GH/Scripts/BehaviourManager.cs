@@ -8,10 +8,12 @@ namespace GH.Scripts
         [SerializeField] public KeyCode abilityKey1;
         [SerializeField] public KeyCode abilityKey2;
         [SerializeField] private GameObject bombPrefab;
+        [SerializeField] private GameObject invisibleBombPrefab;
         private int _currentStateIndex;
 
         public Vector2 Position;
         public GameObject BombPrefab => bombPrefab;
+        public GameObject InvisibleBombPrefab => invisibleBombPrefab;
 
         private void Start()
         {
