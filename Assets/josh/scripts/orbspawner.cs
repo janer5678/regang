@@ -23,7 +23,7 @@ public class orbspawner : MonoBehaviour
         if (timer1 < 0)
         {
             Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-            timer1 = 10;
+            timer1 = 5;
             a = false;
         }
     }
