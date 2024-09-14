@@ -32,6 +32,7 @@ TagManager:
   - b6
   - b7
   - b8
+  - player
   layers:
   - Default
   - TransparentFX
