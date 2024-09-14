@@ -843,6 +843,7 @@ Transform:
   - {fileID: 473961826}
   - {fileID: 1840731165}
   - {fileID: 1426640913}
+  - {fileID: 387865411}
   m_Father: {fileID: 378844674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &289969691
@@ -941,6 +942,7 @@ MonoBehaviour:
   groundCheckMiddle: {fileID: 473961825}
   groundCheckLeft: {fileID: 1840731164}
   groundCheckRight: {fileID: 1426640912}
+  _bullet: {fileID: 387865410}
   isGrounded: 1
   animator: {fileID: 289969694}
 --- !u!95 &289969694
@@ -980,6 +982,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 75156092}
   - {fileID: 1075534108}
+  - {fileID: 365628966}
   _animator: {fileID: 289969694}
 --- !u!1 &330321983
 GameObject:
@@ -1452,6 +1455,53 @@ Transform:
   - {fileID: 289969690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &387865410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387865411}
+  - component: {fileID: 387865412}
+  m_Layer: 0
+  m_Name: Bullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &387865411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387865410}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 289969690}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &387865412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387865410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f1ed0e68ee7b04ea3928e91713fd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 289969690}
+  _bullet: {fileID: 2919076649778024970, guid: 7597acfb256c41e4599680f7489e5f51, type: 3}
+  _player4: {fileID: 289969693}
 --- !u!1 &431454327
 GameObject:
   m_ObjectHideFlags: 0

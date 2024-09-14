@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MurderSuicide : MonoBehaviour
@@ -36,19 +37,8 @@ public class MurderSuicide : MonoBehaviour
             {
                 MurderSuicideFunc();
             }
-
-
         }
-
-
-
     }
-
-    IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(5);
-    }
-
     void MurderSuicideFunc()
     {
         if (enemies.Length == 0) { return; }
@@ -57,8 +47,6 @@ public class MurderSuicide : MonoBehaviour
 
         if (closestEnemy != null) 
         {
-            
-            StartCoroutine(Timer());
             Destroy(closestEnemy);
             Destroy(Player4);
         }
@@ -71,6 +59,7 @@ public class MurderSuicide : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
+            if (enemy == null) continue;
             float distance = Vector3.Distance(Player4.transform.position, enemy.transform.position);
             if (distance < closestDistance)
             {

@@ -12,16 +12,18 @@ public class PlayerMovement : MonoBehaviour
     public float radius = 3f;
 
 
+    public static bool leftdir;
+
+
     [SerializeField] private Transform groundcheck;
 
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private GameObject groundCheckMiddle;
     [SerializeField] private GameObject groundCheckLeft;
     [SerializeField] private GameObject groundCheckRight;
+    [SerializeField] private GameObject _bullet;
     [SerializeField] private bool isGrounded = false;
     [SerializeField] private Animator animator;
-
-
 
     void Start()
     {
@@ -49,12 +51,19 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Movement", true);
             character.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            _bullet.transform.position = character.transform.position + new Vector3(0.55f, 0.0f, 0.0f);
+            leftdir = false;
+
+
+
 
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             animator.SetBool("Movement", true);
             character.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            _bullet.transform.position = character.transform.position + new Vector3(-0.55f, 0.0f, 0.0f);
+            leftdir = true;
         } else
         {
             animator.SetBool("Movement", false);
@@ -72,5 +81,4 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
 }
