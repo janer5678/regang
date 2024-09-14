@@ -76,6 +76,8 @@ public class Move : MonoBehaviour
             onTheGround = false;
         }
 
+
+
         if (!dead)
         {
             GroundCheck();
@@ -160,7 +162,7 @@ public class Move : MonoBehaviour
         SpriteRenderer SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-        playerBody.gravityScale = 5f;
+        playerBody.gravityScale = 3f;
         canJump = true;
         player.enabled = true;
 

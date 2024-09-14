@@ -34,6 +34,8 @@ TagManager:
   - b8
   - shield2
   - bomb
+  - bullet
+  - portal
   layers:
   - Default
   - TransparentFX
