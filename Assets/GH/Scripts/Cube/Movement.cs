@@ -85,7 +85,7 @@ namespace GH.Scripts.Cube
             if (Input.GetKey(KeyCode.UpArrow)) dashVelocity += Vector2.up;
 
             if (dashVelocity == Vector2.zero)
-                yield break;
+                dashVelocity = SpriteRenderer.flipX ? Vector2.left : Vector2.right;
 
             _canDash = false;
             _isDashing = true;
