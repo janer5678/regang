@@ -29,5 +29,10 @@ namespace GH.Scripts
 
             _currentStateIndex = nextIndex;
         }
+
+        public void SetInvincible(bool invincible)
+        {
+            gameObject.tag = invincible ? "wall" : "player";
+        }
     }
 }

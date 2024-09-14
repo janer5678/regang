@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel;
 using GH.Scripts.Timers;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace GH.Scripts.Cube
         private bool _canDash = true;
 
         private bool _isDashing;
+        private bool _touchedGround;
 
         private new void Start()
         {
@@ -32,16 +34,14 @@ namespace GH.Scripts.Cube
 
         private void FixedUpdate()
         {
-            if (_isDashing)
-                return;
-
             Abilities();
             Move();
         }
 
         public void Move()
         {
-            RigidBody.gravityScale = 1;
+            if (_isDashing) return;
+
             RigidBody.velocity = new Vector2(0, RigidBody.velocity.y);
 
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -67,7 +67,10 @@ namespace GH.Scripts.Cube
                 var hit = Physics2D.Raycast(rayCast.transform.position, -Vector2.up, 0.1f);
 
                 if (hit)
+                {
                     _canJump = true;
+                    _touchedGround = true;
+                }
 
                 Debug.DrawRay(rayCast.transform.position, -Vector2.up * 0.1f, Color.red);
             }
@@ -75,24 +78,27 @@ namespace GH.Scripts.Cube
 
         private IEnumerator Dash()
         {
-            _canDash = false;
-            _isDashing = true;
-            _trailRenderer.emitting = true;
-
-            var originalGravity = RigidBody.gravityScale;
-
             var dashVelocity = Vector2.zero;
-            const int xScale = 20;
 
-            if (Input.GetKey(KeyCode.LeftArrow)) dashVelocity += Vector2.left * xScale;
-            if (Input.GetKey(KeyCode.RightArrow)) dashVelocity += Vector2.right * xScale;
+            if (Input.GetKey(KeyCode.LeftArrow)) dashVelocity += Vector2.left;
+            if (Input.GetKey(KeyCode.RightArrow)) dashVelocity += Vector2.right;
             if (Input.GetKey(KeyCode.DownArrow)) dashVelocity += Vector2.down;
             if (Input.GetKey(KeyCode.UpArrow)) dashVelocity += Vector2.up;
 
-            Debug.Log(dashVelocity);
+            if (dashVelocity == Vector2.zero)
+                yield break;
+
+            _canDash = false;
+            _isDashing = true;
+            _trailRenderer.emitting = true;
+            _touchedGround = false;
+
+            var originalGravity = RigidBody.gravityScale;
 
             RigidBody.gravityScale = 0;
             RigidBody.velocity = dashVelocity * 15;
+
+            BehaviourManager.SetInvincible(true);
 
             yield return new WaitForSeconds(0.15f);
 
@@ -100,6 +106,7 @@ namespace GH.Scripts.Cube
             RigidBody.velocity /= 5;
             _isDashing = false;
             _trailRenderer.emitting = false;
+            BehaviourManager.SetInvincible(false);
 
             yield return new WaitForSeconds(0.85f);
             _canDash = true;
@@ -107,10 +114,13 @@ namespace GH.Scripts.Cube
 
         public void Abilities()
         {
+            if (_isDashing) return;
+
             // dash
-            if (Input.GetKey(BehaviourManager.abilityKey1) && _canDash)
+            if (Input.GetKey(BehaviourManager.abilityKey1) && _canDash && _touchedGround)
             {
                 StartCoroutine(Dash());
+                return;
             }
 
             // turn into ship
