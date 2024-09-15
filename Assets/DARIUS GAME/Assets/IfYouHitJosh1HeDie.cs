@@ -23,5 +23,24 @@ public class IfYouHitJosh1HeDie : MonoBehaviour
         }
 
 
+        if ((collision.gameObject.tag == "Player" || collision.gameObject.tag == "player") && collision.gameObject.name != "player_darius")
+        {
+            if (collision.gameObject.name == "player3" && player3.invincible == true)
+            {
+                Destroy(gameObject);
+            }
+
+            else
+            {
+                Destroy(collision.gameObject);
+            }
+
+        }
+        if (collision.gameObject.tag == "ground")
+        {
+            Destroy(gameObject);
+        }
+
+
     }
 }

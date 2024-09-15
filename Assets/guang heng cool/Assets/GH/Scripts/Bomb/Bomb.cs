@@ -11,7 +11,7 @@ namespace GH.Scripts.Bomb
 
             RigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
 
-            if (collision.gameObject.CompareTag("player"))
+            if ((collision.gameObject.CompareTag("player") || collision.gameObject.CompareTag("Player"))&& collision.gameObject.name != "GH_Cube_Player")
             {
                 Destroy(collision.gameObject);
             }

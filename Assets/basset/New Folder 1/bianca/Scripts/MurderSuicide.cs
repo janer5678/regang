@@ -46,6 +46,108 @@ public class MurderSuicide : MonoBehaviour
     }
     void Update()
     {
+        if (StaticScript.player1character == 1)
+        {
+            enemies[1] = GameObject.Find("player");
+
+        }
+        else if (StaticScript.player1character == 2)
+        {
+            enemies[1] = GameObject.Find("player_darius");
+        }
+        else if (StaticScript.player1character == 3)
+        {
+            enemies[1] = GameObject.Find("GH_Cube_Player");
+        }
+        else if (StaticScript.player1character == 4)
+        {
+            enemies[1] = GameObject.Find("player2");
+        }
+        else if (StaticScript.player1character == 6)
+        {
+            enemies[1] = GameObject.Find("moacat");
+        }
+        else if (StaticScript.player1character == 7)
+        {
+            enemies[1] = GameObject.Find("player3");
+        }
+        else if (StaticScript.player1character == 8)
+        {
+            enemies[1] = GameObject.Find("big blaster");
+        }
+        else if (StaticScript.player1character == 9)
+        {
+            enemies[1] = GameObject.Find("11");
+        }
+        if (StaticScript.player2character == 1)
+        {
+            enemies[2] = GameObject.Find("player");
+
+        }
+        else if (StaticScript.player2character == 2)
+        {
+            enemies[2] = GameObject.Find("player_darius");
+        }
+        else if (StaticScript.player2character == 3)
+        {
+            enemies[2] = GameObject.Find("GH_Cube_Player");
+        }
+        else if (StaticScript.player2character == 4)
+        {
+            enemies[2] = GameObject.Find("player2");
+        }
+        else if (StaticScript.player2character == 6)
+        {
+            enemies[2] = GameObject.Find("moacat");
+        }
+        else if (StaticScript.player2character == 7)
+        {
+            enemies[2] = GameObject.Find("player3");
+        }
+        else if (StaticScript.player2character == 8)
+        {
+            enemies[2] = GameObject.Find("big blaster");
+        }
+        else if (StaticScript.player2character == 9)
+        {
+            enemies[2] = GameObject.Find("11");
+        }
+        if (StaticScript.player3character == 1)
+        {
+            enemies[3] = GameObject.Find("player");
+
+        }
+        else if (StaticScript.player3character == 2)
+        {
+            enemies[3] = GameObject.Find("player_darius");
+        }
+        else if (StaticScript.player3character == 3)
+        {
+            enemies[3] = GameObject.Find("GH_Cube_Player");
+        }
+        else if (StaticScript.player3character == 4)
+        {
+            enemies[3] = GameObject.Find("player2");
+        }
+        else if (StaticScript.player3character == 6)
+        {
+            enemies[3] = GameObject.Find("moacat");
+        }
+        else if (StaticScript.player3character == 7)
+        {
+            enemies[3] = GameObject.Find("player3");
+        }
+        else if (StaticScript.player3character == 8)
+        {
+            enemies[3] = GameObject.Find("big blaster");
+        }
+        else if (StaticScript.player3character == 9)
+        {
+            enemies[3] = GameObject.Find("11");
+        }
+
+
+
         if (StaticScript.player1character == 5)
         {
             if (Input.GetKeyDown(KeyCode.Period))

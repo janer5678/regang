@@ -36,6 +36,9 @@ TagManager:
   - bomb
   - bullet
   - portal
+  - mao
+  - red
+  - haha
   layers:
   - Default
   - TransparentFX

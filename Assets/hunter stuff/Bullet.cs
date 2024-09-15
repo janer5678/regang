@@ -43,6 +43,12 @@ public class Bullet : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Static;
             }
         }
+
+        if ((collision.gameObject.tag == "player" || collision.gameObject.tag == "Player" ) && collision.gameObject.name != "big blaster")
+        {
+            Destroy(collision.gameObject);
+        }
+
     }
 
 

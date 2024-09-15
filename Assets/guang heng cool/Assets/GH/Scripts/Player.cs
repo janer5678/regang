@@ -32,7 +32,7 @@ namespace GH.Scripts
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("player"))
+            if (other.gameObject.CompareTag("player") || other.gameObject.CompareTag("Player"))
             {
                 Destroy(other.gameObject);
             }

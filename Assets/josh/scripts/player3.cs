@@ -103,12 +103,12 @@ public class player3 : MonoBehaviour
         groundCheck.position = new Vector3(originalPosition.x - 0.2f, originalPosition.y + 0.2f, originalPosition.z);
         Vector3 originalPosition2 = groundCheck2.position;
         groundCheck2.position = new Vector3(originalPosition2.x + 0.2f, originalPosition2.y + 0.2f, originalPosition2.z);
-        speed = speed * 3.5f;
+        speed = speed * 2.5f;
         boxCollider2.enabled = true;
         boxCollider.enabled = false;
         yield return new WaitForSeconds(6f);
         animator.SetBool("side", false);
-        speed = speed / 3.5f;
+        speed = speed / 2.5f;
         boxCollider2.enabled = false;
         boxCollider.enabled = true;
         originalPosition = groundCheck.position;
@@ -123,8 +123,8 @@ public class player3 : MonoBehaviour
         object1.SetActive(true);
         print(shield);
         invincible = true;
-        int i = 2;
-        i = i + shieldmax;
+        int i = 1;
+        i = i;
         yield return new WaitForSeconds(i);
         invincible = false;
     }

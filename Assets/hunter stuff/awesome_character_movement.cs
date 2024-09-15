@@ -10,8 +10,9 @@ public class awesome_character_movement : MonoBehaviour
     public float speed;
     public float cum;
     public float jump_force = 8f;
-    public float radius = 100f;
+    public float radius = 0.1f;
     public Rigidbody2D rb;
+    public BoxCollider2D bc;
     public Sprite sprite;
     [SerializeField] private Transform groundcheck;
     [SerializeField] private LayerMask groundlayer;
@@ -86,6 +87,7 @@ public class awesome_character_movement : MonoBehaviour
     {
         real_speed = speed;
         rb = GetComponent<Rigidbody2D>();
+        bc = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         hiden = false;
     }
@@ -129,7 +131,7 @@ public class awesome_character_movement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.D) && (!hiden))
             {
-                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = false;
                 direction = new Vector2(cum, 0f);
@@ -137,7 +139,7 @@ public class awesome_character_movement : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.A) && (!hiden))
             {
-                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = true;
                 direction = new Vector2(-cum, 0f);
@@ -152,7 +154,7 @@ public class awesome_character_movement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.RightArrow) && (!hiden))
             {
-                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = false;
                 direction = new Vector2(cum, 0f);
@@ -160,7 +162,7 @@ public class awesome_character_movement : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.LeftArrow) && (!hiden))
             {
-                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = true;
                 direction = new Vector2(-cum, 0f);
@@ -175,7 +177,7 @@ public class awesome_character_movement : MonoBehaviour
         {
             if (move > 0 && (!hiden))
             {
-                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = false;
                 direction = new Vector2(cum, 0f);
@@ -183,7 +185,7 @@ public class awesome_character_movement : MonoBehaviour
             }
             else if (move < 0 && (!hiden))
             {
-                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 1000, 0, 0));
+                character.transform.Translate(new Vector3(-real_speed * Time.deltaTime * 500, 0, 0));
                 animator.SetFloat("ishowspeedf", 1f);
                 spriteRenderer.flipX = true;
                 direction = new Vector2(-cum, 0f);
@@ -203,6 +205,16 @@ public class awesome_character_movement : MonoBehaviour
                 animator.SetFloat("squat", 1f);
                 real_speed = speed / 5;
                 direction = new Vector2(0f, -cum);
+
+                bc.size = new Vector2(0.47f, 0.3f);
+
+                bc.offset = new Vector2(-0.04f, -0.046f);
+            }
+            else
+            {
+                bc.size = new Vector2(0.47f, 0.6f);
+
+                bc.offset = new Vector2(-0.04f, 0.086f);
             }
         }
         else if (StaticScript.player1character == 8)
@@ -213,6 +225,15 @@ public class awesome_character_movement : MonoBehaviour
                 animator.SetFloat("squat", 1f);
                 real_speed = speed / 5;
                 direction = new Vector2(0f, -cum);
+
+                bc.size = new Vector2(0.47f, 0.3f);
+                bc.offset = new Vector2(-0.04f, -0.046f);
+            }
+            else
+            {
+                bc.size = new Vector2(0.47f, 0.6f);
+
+                bc.offset = new Vector2(-0.04f, 0.086f);
             }
         }
         else if (StaticScript.player3character == 8)
@@ -223,6 +244,13 @@ public class awesome_character_movement : MonoBehaviour
                 animator.SetFloat("squat", 1f);
                 real_speed = speed / 5;
                 direction = new Vector2(0f, -cum);
+                bc.size = new Vector2( 0.47f, 0.3f);
+                bc.offset = new Vector2(-0.04f, -0.046f);
+            }
+            else
+            {
+                bc.size = new Vector2(0.47f, 0.6f);
+                bc.offset = new Vector2(-0.04f, 0.086f);
             }
         }
 

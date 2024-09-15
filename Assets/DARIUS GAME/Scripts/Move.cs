@@ -140,11 +140,11 @@ public class Move : MonoBehaviour
 
 
 
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.1f, transform.position.y), Vector2.down, 0.4f, groundLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.05f, transform.position.y), Vector2.down, 0.4f, groundLayer);
 
 
 
-        RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 0.1f, transform.position.y), Vector2.down, 0.4f, groundLayer);
+        RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 0.05f, transform.position.y), Vector2.down, 0.4f, groundLayer);
 
         if (hit.collider != null)
         {

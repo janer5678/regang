@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -29,9 +30,21 @@ public class player3shield : MonoBehaviour
         spriteRenderer.color = color;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject.Find("player3").tag = "player";
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        
+        GameObject.Find("player3").tag = "haha";
+
+        
+
+
         if (player3.invincible == true )
         {
             spriteRenderer.color = new Color(0.5f, 0f, 0.5f);
@@ -45,6 +58,17 @@ public class player3shield : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        if (collision.gameObject.tag != "ground")
+        {
+            Destroy(collision.gameObject);
+            GameObject.Find("player3").tag = "player";
+            
+            Destroy(gameObject);
+        }
+
+
+
         if (collision.gameObject.CompareTag("jumpboostorb"))
         {
             Destroy(collision.gameObject);

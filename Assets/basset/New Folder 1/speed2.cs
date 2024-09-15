@@ -29,7 +29,12 @@ public class speed : MonoBehaviour
         } else
         {
             Destroy(gameObject);
-            Destroy(collision.gameObject);
+
+            if (gameObject.name != "Player4")
+            {
+                Destroy(collision.gameObject);
+
+            }
         }
     }
 }
