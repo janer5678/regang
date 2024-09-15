@@ -139,7 +139,7 @@ public class gunscript : MonoBehaviour
             if (Input.GetKey(KeyCode.Period) && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 5;
+                player.timer2 = 4;
                 StartCoroutine(bombshoot());
                 StartCoroutine(bombshoot2());
 
@@ -150,7 +150,7 @@ public class gunscript : MonoBehaviour
             if (Input.GetKey(KeyCode.Alpha1) && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 5;
+                player.timer2 = 4;
                 StartCoroutine(bombshoot());
                 StartCoroutine(bombshoot2());
             }
@@ -160,7 +160,7 @@ public class gunscript : MonoBehaviour
             if (attack2 > 0 && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 5;
+                player.timer2 = 4;
                 StartCoroutine(bombshoot());
                 StartCoroutine(bombshoot2());
             }

@@ -49,6 +49,14 @@ public class bigs : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("jumpboostorb"))
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("orb2"))
+        {
+            return;
+        }
         if (collision.gameObject == player3.pl3 && player3.invincible == true)
         {
             Destroy(gameObject);
@@ -56,7 +64,6 @@ public class bigs : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("shield"))
         {
-            Destroy(gameObject);
             return;
         }
         if (collision.gameObject.CompareTag("shield2"))

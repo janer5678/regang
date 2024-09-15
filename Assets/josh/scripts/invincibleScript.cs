@@ -20,11 +20,15 @@ public class invincibleScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && !collision.gameObject.CompareTag("player2") && !collision.gameObject.CompareTag("bigboomerang"))
+        if  (collision.gameObject.CompareTag("player") && collision.gameObject != player2.pl2)
         {
             Destroy(collision.gameObject);
             player2.kill = true;
+        }
+
+        if (!collision.gameObject.CompareTag("blue") && !collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground")  && !collision.gameObject.CompareTag("bigboomerang"))
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

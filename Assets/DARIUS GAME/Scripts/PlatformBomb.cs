@@ -7,7 +7,6 @@ public class PlatformBomb : MonoBehaviour
     public int hP;
     public int damage1;
     public int a = 1;
-    public float colliderSize, bodySize;
     [SerializeField] private BoxCollider2D boxCollider;
     // Start is called before the first frame update
     void Start()
@@ -20,8 +19,8 @@ public class PlatformBomb : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
 
-            gameObject.transform.localScale += new Vector3(bodySize * Time.deltaTime, bodySize * Time.deltaTime, bodySize * Time.deltaTime);
-            boxCollider.size = new Vector2(boxCollider.size.x + colliderSize * Time.deltaTime, boxCollider.size.y + colliderSize * Time.deltaTime);
+            gameObject.transform.localScale += new Vector3(0.0015f, 0.0015f, 0.0015f);
+            boxCollider.size = new Vector2(boxCollider.size.x + 0.00002f, boxCollider.size.y + 0.00002f);
 
 
             //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x + 5f, gameObject.transform.localScale.y + 5f, 0f);

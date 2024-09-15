@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -42,7 +44,7 @@ public class player2 : MonoBehaviour
     private bool reverseControls2 = false;
 
     public static bool staticGunFliped2;
-    private const int abilityCount = 8;
+    private const int abilityCount = 9;
     public static bool bulletDirection = false;
     private bool gravityReversed = false;
     private Color originalColor;
@@ -52,6 +54,7 @@ public class player2 : MonoBehaviour
     public static bool blocking2 = false;
     public GameObject object1;
     public static GameObject pl2;
+    public Vector3 pos;
 
     float move;
     float attack2;
@@ -61,7 +64,6 @@ public class player2 : MonoBehaviour
 
     public static float attack1;
     Josh2Controls controls;
-    
 
     void Awake()
     {
@@ -156,7 +158,7 @@ public class player2 : MonoBehaviour
         invincible = true;
         spriteRenderer.color = Color.grey;
         
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f + jumping);
         invincible = false;
         object1.SetActive(false);
         speed2 = speed2 * 1.6f;
@@ -204,7 +206,7 @@ public class player2 : MonoBehaviour
         }
         if (timer1 != 0 )
         {
-            timer1 = timer1 - 400 * Time.deltaTime;
+            timer1 = timer1 - 40000 * Time.deltaTime;
         }
         if (timer2 != 0)
         {
@@ -251,25 +253,34 @@ public class player2 : MonoBehaviour
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 6)
+                if (ability == 6) {
+                    transform.position = pos;
+                    timer1 = 0;
+                }
+                if (ability == 7)
+                {
+                    StartCoroutine(blueRay());
+
+                }
+                if (ability == 8)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
                 {
                     bulletDirection = true;
                     StartCoroutine(bulletDirectionChanger());
 
-                }
-                if (ability == 7)
-                {
-                    StartCoroutine(Invincible());
-                }
-                if (ability == 8)
-                {
-                    StartCoroutine(blueRay());
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability ==6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -282,6 +293,8 @@ public class player2 : MonoBehaviour
                     ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
         else if (StaticScript.player1character == 4)
@@ -318,23 +331,33 @@ public class player2 : MonoBehaviour
                 }
                 if (ability == 6)
                 {
-                    bulletDirection = true;
-                    StartCoroutine(bulletDirectionChanger());
-
+                    transform.position = pos;
+                    timer1 = 0;
                 }
                 if (ability == 7)
                 {
-                    StartCoroutine(Invincible());
+                    StartCoroutine(blueRay());
+
                 }
                 if (ability == 8)
                 {
-                    StartCoroutine(blueRay());
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability == 6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -347,6 +370,8 @@ public class player2 : MonoBehaviour
                     ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
         else if (StaticScript.player3character == 4)
@@ -383,23 +408,33 @@ public class player2 : MonoBehaviour
                 }
                 if (ability == 6)
                 {
-                    bulletDirection = true;
-                    StartCoroutine(bulletDirectionChanger());
-
+                    transform.position = pos;
+                    timer1 = 0;
                 }
                 if (ability == 7)
                 {
-                    StartCoroutine(Invincible());
+                    StartCoroutine(blueRay());
+
                 }
                 if (ability == 8)
                 {
-                    StartCoroutine(blueRay());
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability == 6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -412,6 +447,8 @@ public class player2 : MonoBehaviour
                     ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
     

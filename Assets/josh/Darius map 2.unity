@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 15905629}
   - component: {fileID: 15905628}
   - component: {fileID: 15905631}
-  - component: {fileID: 15905632}
   m_Layer: 6
   m_Name: Red7
   m_TagString: ground
@@ -409,42 +408,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 15905627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07491a33a3c7c384e93aaec69eb668c0, type: 3}
+  m_Script: {fileID: 11500000, guid: cda9e8d3b07aa794b92443fcdc8d56c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hP: 4
   damage1: 1
-  a: 1
-  colliderSize: 0.01
-  bodySize: 1
-  boxCollider: {fileID: 15905628}
---- !u!50 &15905632
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15905627}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1 &90250541
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,8 +961,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 125508088}
 --- !u!1 &125901945
 GameObject:
@@ -2303,8 +2269,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 349637173}
 --- !u!50 &349637177
 Rigidbody2D:
@@ -3223,8 +3187,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 456830975}
 --- !u!1 &471249384
 GameObject:
@@ -3373,8 +3335,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 471249385}
 --- !u!50 &471249389
 Rigidbody2D:
@@ -5168,8 +5128,6 @@ MonoBehaviour:
   hP: 2
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 1037861218}
 --- !u!1 &1039862839
 GameObject:
@@ -7393,8 +7351,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 1478824251}
 --- !u!50 &1478824255
 Rigidbody2D:
@@ -8089,8 +8045,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 1643083885}
 --- !u!50 &1643083889
 Rigidbody2D:
@@ -10032,8 +9986,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 2049523570}
 --- !u!1 &2057030698
 GameObject:
@@ -10472,8 +10424,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 2106927141}
 --- !u!50 &2106927145
 Rigidbody2D:
@@ -10820,8 +10770,6 @@ MonoBehaviour:
   hP: 3
   damage1: 1
   a: 1
-  colliderSize: 0.01
-  bodySize: 1
   boxCollider: {fileID: 2138889470}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
