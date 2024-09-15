@@ -36,18 +36,39 @@ public class ss : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == player3.pl3 && player3.invincible == true)
+        if (collision.gameObject.CompareTag("jumpboostorb"))
         {
             return;
         }
-        if (collision.gameObject == CompareTag("shield"))
+        if (collision.gameObject.CompareTag("orb2"))
         {
+            return;
+        }
+        if (collision.gameObject == player3.pl3 && player3.invincible == true)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (collision.gameObject.CompareTag("shield"))
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("shield2"))
+        {
+            if (player3.invincible == false)
+            {
+                player3.shield--;
+                Destroy(gameObject);
+                return;
+            }
             return;
         }
         if (collision.gameObject == player2.pl2 && player2.invincible == true)
         {
             return;
         }
+
+
         if (collision.gameObject.CompareTag("wall"))
         {
             Destroy(gameObject);
@@ -58,6 +79,7 @@ public class ss : MonoBehaviour
         }
         if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground"))
         {
+            
             Destroy(gameObject);
             Destroy(collision.gameObject);
             player2.kill = true;

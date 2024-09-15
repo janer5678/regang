@@ -18,7 +18,7 @@ public class OnclickStart : MonoBehaviour
     {
         if (GCscript.mapnumber == 1)
         {
-            //SceneManager.LoadScene("moving playform screen");
+            SceneManager.LoadScene("map2");
         }
         else if (GCscript.mapnumber == 2)
         {

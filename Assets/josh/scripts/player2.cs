@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,8 +13,11 @@ public class player2 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 4f;
-    public float jumpingPower = 4f;
+    public float speed = 0f;
+    private float speed2 = 0f;
+    public float speedy = 6f;
+    public float jumpingPower = 0f;
+    public float jumpy = 6f;
     public static bool kill = false;
     private float jumping = 0f;
     private float jumping2 = 0f;
@@ -39,7 +44,7 @@ public class player2 : MonoBehaviour
     private bool reverseControls2 = false;
 
     public static bool staticGunFliped2;
-    private const int abilityCount = 7;
+    private const int abilityCount = 9;
     public static bool bulletDirection = false;
     private bool gravityReversed = false;
     private Color originalColor;
@@ -48,8 +53,8 @@ public class player2 : MonoBehaviour
     public static float timer2 = 0;
     public static bool blocking2 = false;
     public GameObject object1;
-    private float speed2 = 4f;
     public static GameObject pl2;
+    public Vector3 pos;
 
     float move;
     float attack2;
@@ -103,7 +108,9 @@ public class player2 : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ability = ability + UnityEngine.Random.Range(1, 4) - 1;
         originalColor = spriteRenderer.color;
-        ability = 2;
+        speed = speedy;
+        speed2 = speedy;
+        jumpingPower = jumpy;
 
     }
     void FlipSprite()
@@ -151,7 +158,7 @@ public class player2 : MonoBehaviour
         invincible = true;
         spriteRenderer.color = Color.grey;
         
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f + jumping);
         invincible = false;
         object1.SetActive(false);
         speed2 = speed2 * 1.6f;
@@ -199,61 +206,81 @@ public class player2 : MonoBehaviour
         }
         if (timer1 != 0 )
         {
-            timer1 = timer1 - 4;
+            timer1 = timer1 - 40000 * Time.deltaTime;
         }
         if (timer2 != 0)
         {
-            timer2--;
+            timer2 = timer2 - 400 * Time.deltaTime;
         }
-
-        
+        if (timer2 < 0)
+        {
+            timer2 = 0;
+        }
+        if (timer1 < 0)
+        {
+            timer1 = 0;
+        }
         if (StaticScript.player2character == 4)
         {
                 
             if ((Input.GetKeyDown(KeyCode.Alpha1)) && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2)
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
-                {
-                    bulletDirection = true;
-                    StartCoroutine(bulletDirectionChanger());
-
-                }
-                if (ability == 6)
-                {
-                    StartCoroutine(Invincible());
+                if (ability == 6) {
+                    transform.position = pos;
+                    timer1 = 0;
                 }
                 if (ability == 7)
                 {
                     StartCoroutine(blueRay());
+
+                }
+                if (ability == 8)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability ==6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -262,58 +289,75 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
         else if (StaticScript.player1character == 4)
         {
             if ((Input.GetKeyDown(KeyCode.Period)) && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2)
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
-                {
-                    bulletDirection = true;
-                    StartCoroutine(bulletDirectionChanger());
-
-                }
                 if (ability == 6)
                 {
-                    StartCoroutine(Invincible());
+                    transform.position = pos;
+                    timer1 = 0;
                 }
                 if (ability == 7)
                 {
                     StartCoroutine(blueRay());
+
+                }
+                if (ability == 8)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability == 6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -322,58 +366,75 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
         else if (StaticScript.player3character == 4)
         {
             if (attack2 == 1 && timer1 == 0)
             {
-                timer1 = 3000;
-
+                timer1 = 4000 - jumping * 750;
                 if (ability == 0)
                 {
-                    StartCoroutine(ReverseControlsCoroutine());
+                    timer1 = 0;
+                    ability++;
                 }
                 if (ability == 1)
                 {
+                    StartCoroutine(ReverseControlsCoroutine());
+                }
+
+                if (ability == 2)
+                {
                     StartCoroutine(ReverseControlsCoroutine2());
                 }
-                if (ability == 2)
+                if (ability == 3)
                 {
                     bigboomerang = true;
                     StartCoroutine(bigBoomerang2());
                 }
-                if (ability == 3)
+                if (ability == 4)
                 {
                     StartCoroutine(GravityReverse());
                 }
-                if (ability == 4)
+                if (ability == 5)
                 {
                     StartCoroutine(Invisible());
                 }
-                if (ability == 5)
-                {
-                    bulletDirection = true;
-                    StartCoroutine(bulletDirectionChanger());
-
-                }
                 if (ability == 6)
                 {
-                    StartCoroutine(Invincible());
+                    transform.position = pos;
+                    timer1 = 0;
                 }
                 if (ability == 7)
                 {
                     StartCoroutine(blueRay());
+
+                }
+                if (ability == 8)
+                {
+                    StartCoroutine(Invincible());
+                }
+                if (ability == 9)
+                {
+                    bulletDirection = true;
+                    StartCoroutine(bulletDirectionChanger());
+
                 }
                 if (ability == abilityCount)
                 {
                     ability = 0;
                     ability = ability + UnityEngine.Random.Range(1, 3) - 1;
 
+                }
+                else if (ability == 6)
+                {
+                    ability++;
                 }
                 else if (ability == (abilityCount - 1))
                 {
@@ -382,10 +443,12 @@ public class player2 : MonoBehaviour
                 }
                 else
                 {
-                    ability++;
-                    //ability = ability + UnityEngine.Random.Range(1, 3);
+                    //ability++;
+                    ability = ability + UnityEngine.Random.Range(1, 3);
 
                 }
+
+                pos = transform.position;
             }
         }
     
@@ -645,20 +708,21 @@ public class player2 : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (gravityReversed == true)
-        {
-            RaycastHit2D hits = Physics2D.Raycast(ceilingCheck.position, Vector2.up, 0.1f, groundlayer);
-            bool isTouchingCeiling = false;
-            if (hits.collider != null)
-            {
-                isTouchingCeiling = true;
-            }
-            else
-            {
-                isTouchingCeiling = false;
-            }
-            return isTouchingCeiling;
-        }
+        //if (gravityReversed == true)
+        //{
+        //    RaycastHit2D hits = Physics2D.Raycast(ceilingCheck.position, Vector2.up, 0.1f, groundlayer);
+        //    bool isTouchingCeiling = false;
+        //    if (hits.collider != null)
+        //    {
+        //        isTouchingCeiling = true;
+        //    }
+        //    else
+        //    {
+        //        isTouchingCeiling = false;
+        //    }
+        //    return isTouchingCeiling;
+        //}
+
         //return Physics2D.OverlapCircle(groundCheck.position, radius, groundlayer);
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundlayer);
         RaycastHit2D hit2 = Physics2D.Raycast(groundCheck2.position, Vector2.down, 0.1f, groundlayer);

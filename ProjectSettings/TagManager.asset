@@ -32,7 +32,10 @@ TagManager:
   - b6
   - b7
   - b8
-  - player
+  - shield2
+  - bomb
+  - bullet
+  - portal
   layers:
   - Default
   - TransparentFX
