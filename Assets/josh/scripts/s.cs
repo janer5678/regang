@@ -47,16 +47,30 @@ public class s : MonoBehaviour
     {
         if (collision.gameObject == player3.pl3 && player3.invincible == true)
         {
+            Destroy(gameObject);
             return;
         }
-        if (collision.gameObject == CompareTag("shield"))
+        if (collision.gameObject.CompareTag("shield"))
         {
+            Destroy(gameObject);
+            return;
+        }
+        if (collision.gameObject.CompareTag("shield2"))
+        {
+            if (player3.invincible == false)
+            {
+                player3.shield--;
+                Destroy(gameObject);
+                return;
+            }
             return;
         }
         if (collision.gameObject == player2.pl2 && player2.invincible == true)
         {
             return;
         }
+
+
         if (i == 0 && collision.gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);

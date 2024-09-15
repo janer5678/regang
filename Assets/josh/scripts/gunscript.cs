@@ -35,9 +35,18 @@ public class gunscript : MonoBehaviour
        
 
     }
+    private IEnumerator bombshoot()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 3.5f, gameObject.transform.position.z), Quaternion.identity);
+    }
+    private IEnumerator bombshoot2()
+    {
+        yield return new WaitForSeconds(1f);
+        Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 3.5f, gameObject.transform.position.z), Quaternion.identity);
+    }
 
 
-    
     void OnEnable()
     {
         controls.Josh2.Enable();  // Ensure your action map is enabled
@@ -100,7 +109,7 @@ public class gunscript : MonoBehaviour
             if (Input.GetKey(KeyCode.Slash) && player.timer1 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player.timer1 = 200/5;
+                player.timer1 = 0.2f;
                 
             }
         }
@@ -109,7 +118,7 @@ public class gunscript : MonoBehaviour
             if (Input.GetKey(KeyCode.Q) && player.timer1 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player.timer1 = 200 / 5;
+                player.timer1 = 0.2f;
                 
             }
         }
@@ -118,19 +127,21 @@ public class gunscript : MonoBehaviour
             if (attack1 > 0 && player.timer1 == 0)
             {
                 Instantiate(myPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                player.timer1 = 200 / 5;
+                player.timer1 = 0.2f;
                 
             } 
         }
 
-
+        
 
         if (StaticScript.player1character == 1)
         {
             if (Input.GetKey(KeyCode.Period) && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 4000 / 5;
+                player.timer2 = 5;
+                StartCoroutine(bombshoot());
+                StartCoroutine(bombshoot2());
 
             }
         }
@@ -139,8 +150,9 @@ public class gunscript : MonoBehaviour
             if (Input.GetKey(KeyCode.Alpha1) && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 4000 / 5;
-
+                player.timer2 = 5;
+                StartCoroutine(bombshoot());
+                StartCoroutine(bombshoot2());
             }
         }
         else if (StaticScript.player3character == 1)
@@ -148,8 +160,9 @@ public class gunscript : MonoBehaviour
             if (attack2 > 0 && player.timer2 == 0)
             {
                 Instantiate(myPrefab2, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y -3.5f, gameObject.transform.position.z), Quaternion.identity);
-                player.timer2 = 4000 / 5;
-
+                player.timer2 = 5;
+                StartCoroutine(bombshoot());
+                StartCoroutine(bombshoot2());
             }
         }
 

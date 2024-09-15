@@ -10,11 +10,22 @@ public class ForBullets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            goUp = true;
-        }
+        player = GameObject.Find("player_darius");
+
+        //if (StaticScript.player2character == 2)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.W))
+        //    {
+        //        goUp = true;
+        //    }
+        //}
+        //else if (StaticScript.player1character == 2)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Slash))
+        //    {
+        //        goUp = true;
+        //    }
+        //}
 
         if (player.GetComponent<Move>().toLeft)
         {

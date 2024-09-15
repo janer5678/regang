@@ -7,10 +7,11 @@ public class player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 4f;
-    public float jumpingPower = 4f;
-
-
+    //change speedy and jumpy to change them
+    public float speed = 0f;
+    public float speedy = 6f;
+    public float jumpingPower = 0f;
+    public float jumpy = 6f;
     public float radius = 0.2f;
     [SerializeField] private LayerMask groundlayer;
     [SerializeField] private Transform groundCheck;
@@ -27,8 +28,8 @@ public class player : MonoBehaviour
     private bool isFlipped = true;
 
     public static bool staticGunFliped;
-    public static int timer1 = 0;
-    public static int timer2 = 0;
+    public static float timer1 = 0;
+    public static float timer2 = 0;
     public static GameObject pl;
 
     Josh1Controls1 controls;
@@ -54,7 +55,7 @@ public class player : MonoBehaviour
     void Start()
     {
 
-
+        jumpingPower = jumpy;
         pl = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -87,14 +88,22 @@ public class player : MonoBehaviour
 
 
 
-        
+
         if (timer1 != 0)
         {
-            timer1--;
+            timer1 = timer1 - (1 * Time.deltaTime);
         }
         if (timer2 != 0)
         {
-            timer2--;
+            timer2 = timer2 - (1 * Time.deltaTime);
+        }
+        if (timer2 < 0)
+        {
+            timer2 = 0;
+        }
+        if (timer1 < 0)
+        {
+            timer1 = 0;
         }
         horizontal = 0f;
 
@@ -185,7 +194,7 @@ public class player : MonoBehaviour
             {
 
                 animator.SetBool("crouch", true);
-                speed = 1;
+                speed = speedy/2;
                 boxCollider.enabled = false;
                 if (a == true)
                 {
@@ -199,7 +208,7 @@ public class player : MonoBehaviour
             else
             {
                 animator.SetBool("crouch", false);
-                speed = 3;
+                speed = speedy;
 
                 boxCollider.enabled = true;
                 if (b == true)
@@ -216,7 +225,7 @@ public class player : MonoBehaviour
             {
 
                 animator.SetBool("crouch", true);
-                speed = 1;
+                speed = speedy/2;
                 boxCollider.enabled = false;
                 if (a == true)
                 {
@@ -230,7 +239,7 @@ public class player : MonoBehaviour
             else
             {
                 animator.SetBool("crouch", false);
-                speed = 3;
+                speed = speedy;
 
                 boxCollider.enabled = true;
                 if (b == true)
@@ -249,7 +258,7 @@ public class player : MonoBehaviour
             {
                 
                 animator.SetBool("crouch", true);
-                speed = 1;
+                speed = speedy / 2;
                 boxCollider.enabled = false;
                 if (a == true)
                 {
@@ -263,7 +272,7 @@ public class player : MonoBehaviour
             else
             {
                 animator.SetBool("crouch", false);
-                speed = 3;
+                speed = speedy;
 
                 boxCollider.enabled = true;
                 if (b == true)

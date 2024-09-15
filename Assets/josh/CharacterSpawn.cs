@@ -49,14 +49,26 @@ public class CharacterSpawn : MonoBehaviour
 
 
 
+        if (StaticScript.player1character != 3)
+        {
+            Players[StaticScript.player1character - 1].SetActive(true);
+        }
+        if (StaticScript.player2character != 3)
+        {
+            Players[StaticScript.player2character - 1].SetActive(true);
+        }
+        if (StaticScript.player3character != 3)
+        {
+            Players[StaticScript.player3character - 1].SetActive(true);
+        }
 
-        Players[StaticScript.player1character - 1].SetActive(true);
-        Players[StaticScript.player2character - 1].SetActive(true);
-        Players[StaticScript.player3character - 1].SetActive(true);
+        if (StaticScript.player3character != 3 && StaticScript.player2character != 3 && StaticScript.player1character != 3)
+        {
+            Players[2].SetActive(false);
+        }
 
 
         Players[StaticScript.player1character - 1].transform.position = Player1Spawn;
-
         Players[StaticScript.player2character - 1].transform.position = Player2Spawn;
         Players[StaticScript.player3character - 1].transform.position = Player3Spawn;
     }

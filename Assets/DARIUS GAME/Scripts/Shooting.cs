@@ -22,15 +22,38 @@ public class Shooting : MonoBehaviour
     public GameObject b8;
 
     private float cooldown = 0f;
+    DariusControls controls;
+    float attack1;
+    float attack2;
+
+    void Awake()
+    {
+        controls = new DariusControls();
+
+        controls.Josh2.Attack1.performed += ctx => attack1 = ctx.ReadValue<float>();
+        controls.Josh2.Attack1.canceled += ctx => attack1 = 0f;
+
+        controls.Josh2.Attack2.performed += ctx => attack2 = ctx.ReadValue<float>();
+        controls.Josh2.Attack2.canceled += ctx => attack2 = 0f;
+    }
 
     // Start is called before the first frame update
-    
+
 
     void Start()
     {
         
     }
 
+    void OnEnable()
+    {
+        controls.Josh2.Enable();  // Ensure your action map is enabled
+    }
+
+    void OnDisable()
+    {
+        controls.Josh2.Disable(); // Disable to avoid memory leaks or errors
+    }
     // Update is called once per frame
     void Update()
     {
@@ -45,25 +68,77 @@ public class Shooting : MonoBehaviour
             CountStart = false;
         }
 
-        if(Input.GetKey(KeyCode.Q))
+        if (StaticScript.player2character == 2)
         {
-
-
-            if (CountStart == false)
+            if (Input.GetKey(KeyCode.Q))
             {
-                Shoot();
 
+
+                if (CountStart == false)
+                {
+                    Shoot();
+
+                }
+            }
+        }
+        else if (StaticScript.player1character == 2)
+        {
+            if (Input.GetKey(KeyCode.Slash))
+            {
+
+
+                if (CountStart == false)
+                {
+                    
+                    Shoot();
+
+                }
+            }
+        }
+        else if (StaticScript.player3character == 2)
+        {
+            if (attack1 > 0)
+            {
+
+
+                if (CountStart == false)
+                {
+
+                    Shoot();
+
+                }
             }
         }
 
 
 
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown < 0)
+        if (StaticScript.player2character == 2)
         {
-            BigShoot();
-            cooldown = 3f;
+            if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown < 0)
+            {
+                BigShoot();
+                cooldown = 3f;
+            }
         }
+        else if (StaticScript.player1character == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.Period) && cooldown < 0)
+            {
+                BigShoot();
+                cooldown = 3f;
+            }
+        }
+
+
+        else if (StaticScript.player3character == 2)
+        {
+            if (attack2 > 0 && cooldown < 0)
+            {
+                BigShoot();
+                cooldown = 3f;
+            }
+        }
+
 
         cooldown = cooldown - 1 * Time.deltaTime;
 

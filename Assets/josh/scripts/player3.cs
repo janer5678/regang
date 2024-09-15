@@ -6,9 +6,11 @@ public class player3 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float horizontal;
-    public float speed = 2f;
-    public float jumpingPower = 4f;
-
+    public float speed = 0f;
+    public float jumpingPower = 0f;
+    public float speedy = 3f;
+    public float jumpy = 6f;
+    public static int hi = 0;
     public float radius = 0.2f;
 
     [SerializeField] private LayerMask groundlayer;
@@ -25,9 +27,9 @@ public class player3 : MonoBehaviour
     private bool isFlipped = true;
 
     public static bool staticGunFliped;
-    public static int timer1 = 0;
-    public static int timer2 = 0;
-    public static int timer3 = 0;
+    public static float timer1 = 0;
+    public static float timer2 = 0;
+    public static float timer3 = 0;
     public static int shield = 1;
     public static int shieldmax = 1;
     public static bool invincible = false;
@@ -83,6 +85,8 @@ public class player3 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2.enabled = false;
+        speed = speedy;
+        jumpingPower = jumpy;
 
     }
     void FlipSprite()
@@ -116,6 +120,8 @@ public class player3 : MonoBehaviour
     {
         shieldmax++;
         shield++;
+        object1.SetActive(true);
+        print(shield);
         invincible = true;
         int i = 2;
         i = i + shieldmax;
@@ -128,22 +134,34 @@ public class player3 : MonoBehaviour
     {
         if (timer1 != 0)
         {
-            timer1 = timer1 - 1;
+            timer1 = timer1 - (1 * Time.deltaTime);
         }
         if (timer2 != 0)
         {
-            timer2 = timer2 - 1;
+            timer2 = timer2 - (1 * Time.deltaTime);
+        }
+        if (timer2 < 0)
+        {
+            timer2 = 0;
+        }
+        if (timer1 < 0)
+        {
+            timer1 = 0;
         }
         if (timer3 != 0)
         {
-            timer3 = timer3 - 1;
+            timer3 = timer3 - (1 * Time.deltaTime);
+        }
+        if (timer3 < 0)
+        {
+            timer3 = 0;
         }
 
         if (StaticScript.player1character == 7)
         {
             if (Input.GetKey(KeyCode.Slash) && timer1 == 0)
             {
-                timer1 = 4000;
+                timer1 = 14 - shieldmax;
                 StartCoroutine(ability1());
             }
         }
@@ -151,7 +169,7 @@ public class player3 : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Q) && timer1 == 0)
             {
-                timer1 = 4000;
+                timer1 = 14 - shieldmax;
                 StartCoroutine(ability1());
             }
         }
@@ -160,7 +178,7 @@ public class player3 : MonoBehaviour
 
             if (attack1 > 0 && timer1 == 0)
             {
-                timer1 = 4000;
+                timer1 = 14 - shieldmax;
                 StartCoroutine(ability1());
             }
 
@@ -172,7 +190,7 @@ public class player3 : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Period) && timer2 == 0)
             {
-                timer2 = 4000;
+                timer2 = 14 - shieldmax;
                 StartCoroutine(ability2());
 
             }
@@ -181,7 +199,7 @@ public class player3 : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Alpha1) && timer2 == 0)
             {
-                timer2 = 4000;
+                timer2 = 14 - shieldmax;
                 StartCoroutine(ability2());
 
             }
@@ -190,7 +208,7 @@ public class player3 : MonoBehaviour
         {
             if (attack2 > 0 && timer2 == 0)
             {
-                timer2 = 4000;
+                timer2 = 14 - shieldmax;
                 StartCoroutine(ability2());
             }
         }
@@ -202,66 +220,78 @@ public class player3 : MonoBehaviour
 
         if(StaticScript.player1character == 7)
         {
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow)&&timer3==0)
             {
+                if(invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
 
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
-                timer3 = 1500;
+                timer3 = 4;
             }
         }
         else if (StaticScript.player2character == 7)
         {
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) && timer3==0)
             {
+                if (invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
-
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
-                timer3 = 1500;
+                timer3 = 4 - shieldmax/50;
             }
         }
         else if (StaticScript.player3character == 7)
         {
-            if (down > 0)
+            if (down > 0 && timer3 == 0)
             {
+                if (invincible == true)
+                {
+                    shieldmax++;
+                }
                 float randomValue = Random.value;
 
-                if (randomValue <= 0.4f)
+                if (randomValue <= 0.8f)
                 {
                     shieldmax++;
                 }
                 randomValue = Random.value;
-                if (randomValue <= 0.2f)
+                if (randomValue <= 0.4f)
                 {
                     shieldmax--;
                 }
-                timer3 = 1500;
+                timer3 = 4;
+                randomValue = 1;
             }
         }
 
 
 
-        if (shieldmax == 0)
+        if (shield == 0)
         {
             object1.SetActive(false);
         }
-        if (shieldmax > 0)
+        if (shield > 0)
         {
             if (object1 != null)
             {
@@ -269,7 +299,14 @@ public class player3 : MonoBehaviour
             }
 
         }
-
+        if (shield < 0)
+        {
+            shield = 0;
+        }
+        if (shieldmax < 0)
+        {
+            shieldmax = 0;
+        }
 
         horizontal = 0f;
 
@@ -351,14 +388,17 @@ public class player3 : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
         }
-
-
-        
+        if (hi == 1)
+        {
+            jumpingPower = jumpingPower * 1.75f;
+            StartCoroutine(jumpReset());
+            hi = 0;
+        }
 
     }
-   
 
 
+    
 
     private bool IsGrounded()
     {
@@ -386,7 +426,7 @@ public class player3 : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("jumpboostorb"))
         {
@@ -399,6 +439,7 @@ public class player3 : MonoBehaviour
         {
             Destroy(collision.gameObject);
             orbspawner.a = true;
+            timer3 = 0;
             timer2 = 0;
             timer1 = 0;
         }
@@ -406,11 +447,24 @@ public class player3 : MonoBehaviour
         {
             return;
         }
+        if (collision.gameObject == CompareTag("shield"))
+        {
+            return;
+        }
+        if (collision.gameObject == CompareTag("shield2"))
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("player"))
         {
             Destroy(collision.gameObject);
-            shieldmax++;
-            shield = shieldmax;
+            if (shield == 0)
+            {
+                shieldmax++;
+                shield = shieldmax;
+                object1.SetActive(true);
+            }
+            
         }
     }
 }

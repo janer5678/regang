@@ -45,8 +45,24 @@ public class player3shield : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("jumpboostorb"))
+        {
+            Destroy(collision.gameObject);
+            powerupjump.a = true;
+            player3.hi = 1;
+            return;
+        }
+        if (collision.gameObject.CompareTag("orb2"))
+        {
+            Destroy(collision.gameObject);
+            orbspawner.a = true;
+            player3.timer3 = 0;
+            player3.timer2 = 0;
+            player3.timer1 = 0;
+            return;
+        }
 
-        if (!collision.gameObject.CompareTag("wall") && !collision.gameObject.CompareTag("ground") && collision.gameObject != player3.pl3)
+        if (collision.gameObject.CompareTag("player") && collision.gameObject != player3.pl3)
         {
             Destroy(collision.gameObject);
             player3.shieldmax++;
